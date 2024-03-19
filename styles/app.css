@@ -1,0 +1,106 @@
+body {
+    font-family: 'Barlow', Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Use 100% of the viewport height */
+}
+
+.first-half {
+    background-color: #602a2a; /* Brown color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1.25; /* Set flex to 1.25 */
+    position: relative; /* Set position to relative for containing the absolutely positioned image */
+}
+
+.second-half {
+    background-color: #e6e6e6; /* Gray color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the start */
+    flex: 2; /* Set flex to 2 */
+}
+
+h1 {
+    font-family: 'Barlow', Arial, sans-serif;
+    color: #fff;
+    padding: 10px; /* Adjust padding to give space around the text */
+    font-size: 65px; /* Make the title font size bigger */
+    margin: 0; /* Remove default margins */
+    border-radius: 10px;
+    background-color: #805e64;
+    border: none; /* Add border around the title */
+    position: relative; /* Ensure the z-index works properly */
+    z-index: 1; /* Ensure the title appears above the image */
+    
+    
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px; /* Add top margin to adjust the position of the buttons */
+}
+
+button {
+    font-family: 'Barlow', Arial, sans-serif;
+    padding: 10px 25px; /* Keep the same padding */
+    font-size: 50px; /* Make the button font size bigger */
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #602a2a;
+    color: #fff;
+    line-height: 1; /* Adjust line height to keep text closer to the border */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.background-image {
+    position: absolute;
+    width: 45%; /* Set the width of the image to 50% of its container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    top: 0;
+    left: 1;
+    z-index: 0; /* Ensure the image appears below the title */
+}
+
+.option button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.dark-mode body {
+    background-color: #333333; /* Dark mode background color */
+    color: #ffffff; /* Dark mode text color */
+}
+
+.dark-mode .first-half {
+    background-color: #1d1d1d; /* Dark mode brown color */
+}
+
+.dark-mode .second-half {
+    background-color: #262626; /* Dark mode gray color */
+}
+
+.dark-mode h1 {
+    color: #ffffff; /* Dark mode title text color */
+    background-color: #434343; /* Dark mode title background color */
+}
+
+.dark-mode button {
+    background-color: #434343; /* Dark mode button background color */
+    color: #ffffff; /* Dark mode button text color */
+}
