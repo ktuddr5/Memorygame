@@ -58,9 +58,11 @@
 </main>
 
 <script>
-    // JavaScript code to toggle dark mode
+    // JavaScript code to toggle dark mode and store the preference
 	const toggleDarkMode = () => {
     document.body.classList.toggle('dark-mode');
+    const darkModeEnabled = document.body.classList.contains("dark-mode");
+    localStorage.setItem("darkModeEnabled", darkModeEnabled);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,6 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
     darkModeButton.textContent = 'Toggle Dark Mode';
     darkModeButton.addEventListener('click', toggleDarkMode);
     document.body.insertBefore(darkModeButton, document.body.firstChild);
+
+    // Retrieve dark mode preference from local storage on page load
+    const darkModeEnabled = localStorage.getItem("darkModeEnabled");
+    if (darkModeEnabled === "true") {
+      document.body.classList.add("dark-mode");
+    }
 });
 </script>
 </body>
