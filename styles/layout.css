@@ -37,3 +37,35 @@
 	background-color:#786464;
 	font-size: 0pt;
 }
+
+.dark-mode {
+    --page-background-color: #1D1D1D;
+    --text-color: #ffffff;
+    --link-color: #67b2e8;
+    --link-hover-color: #60bec9;
+    /* Update other styles accordingly */
+}
+
+/* Update game node styles for dark mode */
+.dark-mode .node-t {
+    background-color: #D0D0D0;
+    color: #262626;
+}
+
+.dark-mode .node-f {
+    background-color: #454545;
+    color: #262626;
+}
+
+.dark-mode .node-clicked {
+	border-radius: 10px;
+	border-width: 5px;
+	border-style:solid;
+    border-color: #262626;
+	visibility: visible;
+	background-color:#969696;
+	font-size: 0pt;
+}
+.dark-mode #game-board > .node {
+    border-color: #1D1D1D; /* Adjust border color */
+}
