@@ -104,3 +104,6 @@ button:hover {
     background-color: #434343; /* Dark mode button background color */
     color: #ffffff; /* Dark mode button text color */
 }
+.dark-mode button:hover {
+    background-color: #0056b3;
+}
