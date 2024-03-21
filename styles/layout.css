@@ -17,6 +17,12 @@
     visibility: visible;
     font-size: 15pt;
     color: #D4D4D4;
+	background-color:#F1F1F1;
+}
+.node-t-alternate {
+    visibility: visible;
+    font-size: 15pt;
+    color: #D4D4D4;
 	background-color:#342020;
 }
 
@@ -48,6 +54,10 @@
 
 /* Update game node styles for dark mode */
 .dark-mode .node-t {
+    background-color: #454545;
+    color: #262626;
+}
+.dark-mode .node-t-alternate {
     background-color: #D0D0D0;
     color: #262626;
 }
