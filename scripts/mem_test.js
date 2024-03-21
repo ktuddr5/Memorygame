@@ -85,13 +85,38 @@ function generateNextLevel(levelNum, nodeNums) {
     return nodesToRender;
 }
 
+
+
+
 function renderLevelBoard(boardNodes) {
     for (let i = 0; i < boardNodes.length; i++) {
         let boardNode = document.getElementById(boardNodes[i].toString());
-        boardNode.className = "node node-t";
+        let originalClass = boardNode.className; // Store the original class name
+
+        // Set the initial class and text content
+        boardNode.className = "node node-t-alternate";
         boardNode.innerText = (i + 1).toString();
+
+        // Disable click events for the first second
+        boardNode.style.pointerEvents = "none";
+
+        // Switch colors after a delay
+        setTimeout(function() {
+            // Toggle between two classes to switch colors
+            if (boardNode.classList.contains("node-t-alternate")) {
+                boardNode.classList.remove("node-t-alternate");
+                boardNode.classList.add("node-t");
+            } else {
+                boardNode.classList.remove("node-f");
+                boardNode.classList.add("node-t");
+            }
+
+            // Re-enable click events after switching colors
+            boardNode.style.pointerEvents = "auto";
+        }, 1 * 1000); // Switch colors after 1 second       
     }
 }
+
 
 function emptyBoard(board) {
     let templateString = "";
