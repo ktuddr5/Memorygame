@@ -27,6 +27,14 @@
       <div class="option">
         <button id="difficultyButton">Difficulty</button>
       </div>
+      <!-- Difficulty selection section (initially hidden) -->
+      <div id="difficultyOptions" style="display: none;">
+        <button id="1stOption">1</button>
+        <button id="2stOption">2</button>
+        <button id="3stOption">3</button>
+        <button id="4stOption">4</button>
+        <button id="5stOption">5</button>
+      </div>
       <div class="option">
         <button id="darkModeButton">Dark Mode</button>
       </div>
@@ -45,9 +53,21 @@
   function toggleOptions() {
     var optionsSection = document.getElementById("optionsSection");
     if (optionsSection.style.display === "none") {
-      optionsSection.style.display = "block";
+      optionsSection.style.display = "flex";
+      optionsSection.style.flexDirection = "column";
+      optionsSection.style.alignItems = "center";
     } else {
       optionsSection.style.display = "none";
+    }
+  }
+
+  // Function to toggle difficulty options section
+  function toggleDifficulty() {
+    var difficultySection = document.getElementById("difficultyOptions");
+    if (difficultySection.style.display === "none") {
+      difficultySection.style.display = "block";
+    } else {
+      difficultySection.style.display = "none";
     }
   }
 
@@ -62,6 +82,7 @@
   document.getElementById("startButton").addEventListener("click", startGame);
   document.getElementById("optionsButton").addEventListener("click", toggleOptions);
   document.getElementById("darkModeButton").addEventListener("click", toggleDarkMode);
+  document.getElementById("difficultyOptions").addEventListener("click", toggleDifficulty);
 
   // Retrieve dark mode preference from local storage on page load
   document.addEventListener("DOMContentLoaded", function() {
