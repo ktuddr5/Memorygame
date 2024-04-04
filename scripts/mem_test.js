@@ -10,6 +10,14 @@ let level = 2;
 let gameOver = false;
 let firstNodeClicked = false;
 
+
+
+function splitGameField() {
+    // Here you can write logic to split the game field into two sections
+    // For example, you can create another <div> and append it to the main container
+    // or you can modify the existing game field div to occupy only half of the width
+}
+
 $(document).ready(function() {
     let startButton = $("#start-button");
     let startButtonContainer = $("#start-button-container");
@@ -53,8 +61,15 @@ $(document).ready(function() {
             playLevel(defaultBoard.slice());
         }
     });
-});
 
+    function startGame() {
+        resetAll();
+        let roll = defaultBoard.slice();
+        // Template the blank nodes before starting game loop
+        emptyBoard(defaultBoard);
+        playLevel(roll);
+    }
+});
 function startGame() {
     resetAll();
     let roll = defaultBoard.slice();
@@ -151,3 +166,4 @@ function resetAll() {
     gameOver = false;
     firstNodeClicked = false;
 }
+

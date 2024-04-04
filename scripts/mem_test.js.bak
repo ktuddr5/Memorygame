@@ -10,6 +10,22 @@ let level = 2;
 let gameOver = false;
 let firstNodeClicked = false;
 
+
+$(document).ready(function() {
+    $('#start-button').on('click', function() {
+        // Hide the start button container
+        $('#start-button-container').hide();
+        // Split the game field into two
+        splitGameField();
+    });
+});
+
+function splitGameField() {
+    // Here you can write logic to split the game field into two sections
+    // For example, you can create another <div> and append it to the main container
+    // or you can modify the existing game field div to occupy only half of the width
+}
+
 $(document).ready(function() {
     let startButton = $("#start-button");
     let startButtonContainer = $("#start-button-container");
@@ -113,7 +129,7 @@ function renderLevelBoard(boardNodes) {
 
             // Re-enable click events after switching colors
             boardNode.style.pointerEvents = "auto";
-        }, (i+1) * 1000); // Switch colors after i+1 second    If difficulty is changed, make i something else      
+        }, 1 * 1000); // Switch colors after 1 second       
     }
 }
 
@@ -151,3 +167,4 @@ function resetAll() {
     gameOver = false;
     firstNodeClicked = false;
 }
+
