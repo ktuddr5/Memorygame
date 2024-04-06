@@ -120,8 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return matrix[b.length][a.length];
     }
 
-  // Function to extract the name of the picture from its URL
-  function extractPictureName(url) {
+    function extractPictureName(url) {
         const parts = url.split('/');
         const filename = parts[parts.length - 1];
         const nameWithoutExtension = filename.split('.')[0]; // Remove the file extension
@@ -131,14 +130,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return cleanedName.replace(/_/g, ' '); // Replace underscores with spaces
     }
 
+    // Function to remove the word "the" from a string
+    function removeThe(text) {
+        return text.replace(/\bthe\b/gi, '').trim(); // Replace "the" (case insensitive) with an empty string and trim spaces
+    }
+
     // Your existing script...
 
     document.getElementById('guess-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevents the default form submission behavior
 
-        const guess = document.getElementById('guessName').value.trim();
+        const originalGuess = document.getElementById('guessName').value.trim();
+        const guess = removeThe(originalGuess);
         const imageUrl = document.querySelector('#secondary-game-container img').getAttribute('src');
-        const correctAnswer = extractPictureName(imageUrl); // Get the correct answer from the picture URL
+        const correctAnswer = removeThe(extractPictureName(imageUrl)); // Get the correct answer from the picture URL
 
         const distance = levenshteinDistance(guess.toLowerCase(), correctAnswer.toLowerCase());
         const maxAllowedDistance = 2; // Define maximum allowed distance for "close" feedback
@@ -146,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (distance === 0) {
             document.getElementById('guess-result').textContent = "Your guess is correct!";
         } else if (distance <= maxAllowedDistance) {
-            document.getElementById('guess-result').textContent = `Your guess "${guess}" is close!`;
+            document.getElementById('guess-result').textContent = `Your guess "${originalGuess}" is close!`; // Display original guess
         } else {
             document.getElementById('guess-result').textContent = "Sorry, your guess is incorrect. Try again!";
         }
