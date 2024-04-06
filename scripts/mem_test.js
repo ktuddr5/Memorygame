@@ -138,6 +138,11 @@ function generateNextLevel(levelNum, nodeNums) {
     }
 	*/
 	sections.sort((a, b) => countOnes(a) - countOnes(b));
+	while(countOnes(sections[leveltemp]) === 0)
+	{
+		leveltemp++;
+	}
+	if (leveltemp < 16)
 	for(let y = 0; y < sections[leveltemp].length; y++)
 	{
 		for (let x = 0; x < sections[leveltemp][y].length; x++)
