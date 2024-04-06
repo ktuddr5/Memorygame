@@ -34,18 +34,17 @@
         <p id="game-description">
             This current build is based on an earlier concept, expect changes.
             <br/><br/>
-            Click the squares in order according to their numbers.
+            Click the squares that appear.
             <br/>
             The test will get progressively harder.
         </p>
     </section>
-	
     <button id="hide-description-button" class="hide-button">Hide Description</button><br/>
     <hr/>
 	<div id="start-button-container" class="section-txt">
         <button id="start-button">Start</button>
 	</div>
-    <h3 id="game-message" class="section-txt">Click the button above to start the test</h3>
+    <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
     <div id="game-container">
         <div id="game-board" class="game-field">
             <!-- Game nodes will be generated inside this div -->
@@ -53,17 +52,21 @@
     </div>
     <div id="secondary-game-container">
 	<p>
-		TEKSTAS
-		 
+		Animal
 		<br/>
-		<img src="MMM_IMAGES/AnimalsBW/Chicken_BW.png" alt="chicken wing chicken wing chicken macaroni">
+		<img src="MMM_IMAGES/AnimalsBW/Chicken_BW_waifu2x.png" alt="chicken wing chicken wing chicken macaroni">
 		<br/>
-		yoyoyoyo
+		
+		<form action="/action_page.php">
+		<label for="guessName">Guess:</label>
+		<input type="text" id="guessName" name="guessName">
+		<input type="submit" value="Submit"><br>
+		</form>
+		<!-- Click the "Submit" button and the form-data will be sent -->
+		<!--  to a page on the server called "action_page.php -->
 	</p>
     </div>
-	<hr/>
 </main>
-
 <script>
     // JavaScript code to toggle dark mode and store the preference
 	const toggleDarkMode = () => {

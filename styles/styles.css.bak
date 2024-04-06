@@ -32,8 +32,8 @@ p {
 }
 
 img {
-    width: 200px; /* You can adjust the width to your desired size */
-    height: 200px; /* You can adjust the height to your desired size */
+    width: 270px; /* You can adjust the width to your desired size */
+    height: 270px; /* You can adjust the height to your desired size */
 }
 
 /* Hyperlinks */
@@ -74,7 +74,7 @@ a:hover {
 	border-width: 5px;
 	border-style:solid;
     border-color: #D4D4D4;
-	font-size: 0pt;
+	font-size: 15pt;
 }
 
 #start-button-container {

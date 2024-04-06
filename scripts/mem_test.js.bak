@@ -102,51 +102,16 @@ function playLevel(nodeNums) {
 function generateNextLevel(levelNum, nodeNums) {
     emptyBoard(defaultBoard);
     let nodesToRender = [];
-    let image = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0],
-        [0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
-        [1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
-        [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
-    ];
 	
 	// Split the image into 4x4 sections
 	const sections = splitImageIntoSections(image);
 
-/*
-    // Iterate through the image and add nodes at positions where there are pixels with value 1
-    for (let y = 0; y < image.length; y++) {
-        for (let x = 0; x < image[y].length; x++) {
-            // If the pixel value is 1, add the corresponding node number
-            if (image[y][x] === 1) {
-                // Add the node number at position (x, y) to the nodesToRender array
-                nodesToRender.push(nodeNums[x + y * image[y].length]);
-                levelNum--; // Decrease the level count
-            }
-        }
-    }
-	*/
 	sections.sort((a, b) => countOnes(a) - countOnes(b));
 	while(countOnes(sections[leveltemp]) === 0)
 	{
 		leveltemp++;
 	}
-	if (leveltemp > 16)
-	{
-		
-		
-	}
+	if (leveltemp < 16)
 	for(let y = 0; y < sections[leveltemp].length; y++)
 	{
 		for (let x = 0; x < sections[leveltemp][y].length; x++)
@@ -163,75 +128,6 @@ function generateNextLevel(levelNum, nodeNums) {
 	leveltemp++;
     return nodesToRender;
 }
-
-
-/* Game helper functions */
-/*
-function generateNextLevel(levelNum, nodeNums) {
-    emptyBoard(defaultBoard);
-    let nodesToRender = [];
-    let imageWidth = 16; // Width of your image (assuming it's a 16x16 image)
-    let imageHeight = 16; // Height of your image
-
-    // Assuming your image is represented as a two-dimensional array of pixel values
-	    let image = [
-		[0,0,0,1],
-		[1,1,1,1],
-		[1,1,1,0],
-		[0,1,0,0]
-];
-	/*
-    let image = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0],
-        [0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
-        [1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
-        [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
-    ];
-	*//*
-    // Determine the number of nodes to render based on the level
-    let nodesCount = Math.min(levelNum, nodeNums.length);
-    let hasPixelWithValueOne = false; // Flag to track if the 4x4 section contains a pixel with a value of 1
-
-    // Loop through the image pixels to determine the nodes to render and check if the 4x4 section contains a pixel with a value of 1
-    for (let y = 0; y < 4; y++) {
-        for (let x = 0; x < 4; x++) {
-            let pixelValue = image[y][x];
-            if (pixelValue === 1 && nodesCount > 0) {
-                nodesToRender.push(nodeNums.pop());
-                nodesCount--;
-                hasPixelWithValueOne = true;
-            }
-        }
-    }
-
-    // If the 4x4 section doesn't contain any pixel with a value of 1, skip rendering nodes
-    if (!hasPixelWithValueOne) {
-        nodesToRender = [];
-    }
-
-    // Fill in remaining nodes if the level requires more nodes than the image provides
-    while (nodesCount > 0) {
-        nodesToRender.push(nodeNums.pop());
-        nodesCount--;
-    }
-
-    return nodesToRender;
-}
-*/
-
-
 
 function renderLevelBoard(boardNodes) {
     for (let i = 0; i < boardNodes.length; i++) {
