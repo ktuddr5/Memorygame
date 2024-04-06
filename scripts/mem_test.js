@@ -9,9 +9,27 @@ let currentOrder = 0;
 let level = 2;
 let gameOver = false;
 let firstNodeClicked = false;
+let leveltemp = 0;
 
-
-
+// Given image
+let image = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
+    [1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
+];
 function splitGameField() {
     // Here you can write logic to split the game field into two sections
     // For example, you can create another <div> and append it to the main container
@@ -79,6 +97,8 @@ function playLevel(nodeNums) {
     renderLevelBoard(nextNodeOrder);
 }
 
+
+
 function generateNextLevel(levelNum, nodeNums) {
     emptyBoard(defaultBoard);
     let nodesToRender = [];
@@ -100,19 +120,38 @@ function generateNextLevel(levelNum, nodeNums) {
         [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
     ];
+	
+	// Split the image into 4x4 sections
+	const sections = splitImageIntoSections(image);
 
+/*
     // Iterate through the image and add nodes at positions where there are pixels with value 1
     for (let y = 0; y < image.length; y++) {
         for (let x = 0; x < image[y].length; x++) {
             // If the pixel value is 1, add the corresponding node number
-            if (image[y][x] === 1 /*&& levelNum > 0*/) {
+            if (image[y][x] === 1) {
                 // Add the node number at position (x, y) to the nodesToRender array
                 nodesToRender.push(nodeNums[x + y * image[y].length]);
                 levelNum--; // Decrease the level count
             }
         }
     }
-
+	*/
+	sections.sort((a, b) => countOnes(a) - countOnes(b));
+	for(let y = 0; y < sections[leveltemp].length; y++)
+	{
+		for (let x = 0; x < sections[leveltemp][y].length; x++)
+		{
+			if(sections[leveltemp][y][x] === 1)
+			{
+				nodesToRender.push(nodeNums[x+y*sections[leveltemp][y].length]);
+				levelNum--;
+			}
+			
+		}
+		
+	}
+	leveltemp++;
     return nodesToRender;
 }
 
@@ -247,4 +286,45 @@ function resetAll() {
     level = 2;
     gameOver = false;
     firstNodeClicked = false;
+}
+
+
+function splitImageIntoSections(image) {
+    const sections = [];
+
+    // Iterate over the image in steps of 4 pixels both horizontally and vertically
+    for (let y = 0; y < image.length; y += 4) {
+        for (let x = 0; x < image[y].length; x += 4) {
+            const section = [];
+
+            // Extract a 4x4 section from the image
+            for (let offsetY = 0; offsetY < 4; offsetY++) {
+                const row = [];
+                for (let offsetX = 0; offsetX < 4; offsetX++) {
+                    // Handle edge case where the image dimensions might not be divisible by 4
+                    const pixelValue = (image[y + offsetY] && image[y + offsetY][x + offsetX]) || 0;
+                    row.push(pixelValue);
+                }
+                section.push(row);
+            }
+            sections.push(section);
+        }
+    }
+    return sections;
+}
+
+function isEmptySection(section) {
+    return section.every(row => row.every(pixel => pixel === 0));
+}
+
+function countOnes(section) {
+    let count = 0;
+    for (let row of section) {
+        for (let pixel of row) {
+            if (pixel === 1) {
+                count++;
+            }
+        }
+    }
+    return count;
 }
