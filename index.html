@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nameWithoutExtension = filename.split('.')[0]; // Remove the file extension
         
         // Remove additional substrings from the name
-        const cleanedName = nameWithoutExtension.replace(/_(BW|C|waifu2x)/g, ''); // Replace "_BW", "_C", or "_waifu2x" with an empty string
+        const cleanedName = nameWithoutExtension.replace(/_(BW|C|waifu2x|up)/g, ''); // Replace "_BW", "_C", or "_waifu2x" with an empty string
         return cleanedName.replace(/_/g, ' '); // Replace underscores with spaces
     }
 
