@@ -52,22 +52,33 @@
   // Function to toggle options section
   function toggleOptions() {
     var optionsSection = document.getElementById("optionsSection");
+    var optionsButton = document.getElementById("optionsButton");
     if (optionsSection.style.display === "none") {
       optionsSection.style.display = "flex";
       optionsSection.style.flexDirection = "column";
       optionsSection.style.alignItems = "center";
+      optionsButton.style.backgroundColor = "#C0C0C0";
+      optionsButton.style.color = "#A9A9A9";
     } else {
       optionsSection.style.display = "none";
+      optionsButton.style.color = "#fff";
+      optionsButton.style.backgroundColor = "#602a2a";
     }
   }
 
   // Function to toggle difficulty options section
   function toggleDifficulty() {
     var difficultySection = document.getElementById("difficultyOptions");
+    var difficultyButton = document.getElementById("difficultyButton");
     if (difficultySection.style.display === "none") {
       difficultySection.style.display = "block";
+      difficultyButton.style.backgroundColor = "#C0C0C0";
+      difficultyButton.style.color = "#A9A9A9";
+      difficultyButton.style.width = "245px";
     } else {
       difficultySection.style.display = "none";
+      difficultyButton.style.color = "#fff";
+      difficultyButton.style.backgroundColor = "#602a2a";
     }
   }
 
