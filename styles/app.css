@@ -111,3 +111,7 @@ button:hover {
 #difficultyButton {
     width: 245px;
 }
+
+#difficultyOptions button {
+    width: 75px;
+}
