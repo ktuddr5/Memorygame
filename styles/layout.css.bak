@@ -1,4 +1,12 @@
-@charset "utf-8";
+#game-container {
+    float: left;
+    width: 40%;
+}
+
+#secondary-game-container {
+    float: right;
+    width: 40%;
+}
 
 #game-board {
     justify-content: center;
@@ -6,6 +14,13 @@
     display: grid;
     grid-template-columns: 60px 60px 60px 60px;
     grid-template-rows: 60px 60px 60px 60px;
+    margin: 0 auto; /* Center the game board horizontally within its container */
+}
+
+#start-button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
 .node {
@@ -17,31 +32,32 @@
     visibility: visible;
     font-size: 15pt;
     color: #D4D4D4;
-	background-color:#342020;
+    background-color: #F1F1F1;
 }
+
 .node-t-alternate {
     visibility: visible;
     font-size: 15pt;
     color: #D4D4D4;
-	background-color:#342020;
+    background-color: #342020;
 }
 
 .node-f {
     font-size: 15pt;
     color: #D4D4D4;
-	border-color: white;
+    border-color: white;
     visibility: visible;
-	background-color:#F1F1F1;
+    background-color: #F1F1F1;
 }
 
 .node-clicked {
-	border-radius: 10px;
-	border-width: 5px;
-	border-style:solid;
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
     border-color: #D4D4D4;
-	visibility: visible;
-	background-color:#786464;
-	font-size: 0pt;
+    visibility: visible;
+    background-color: #786464;
+    font-size: 0pt;
 }
 
 .dark-mode {
@@ -57,6 +73,7 @@
     background-color: #454545;
     color: #262626;
 }
+
 .dark-mode .node-t-alternate {
     background-color: #D0D0D0;
     color: #262626;
@@ -68,14 +85,15 @@
 }
 
 .dark-mode .node-clicked {
-	border-radius: 10px;
-	border-width: 5px;
-	border-style:solid;
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
     border-color: #262626;
-	visibility: visible;
-	background-color:#969696;
-	font-size: 0pt;
+    visibility: visible;
+    background-color: #969696;
+    font-size: 0pt;
 }
+
 .dark-mode #game-board > .node {
     border-color: #1D1D1D; /* Adjust border color */
 }

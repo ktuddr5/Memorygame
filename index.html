@@ -2,9 +2,6 @@
 <html lang="en-US">
 <head>
     <meta charset="utf-8"/>
-    <meta name="ChimpTest" content="Recreated humanbenchmark.com's chimpanzee test">
-    <meta name="Author" content="Andy Wu">
-    <meta name="Date" content="May 1, 2021">
 
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
@@ -35,28 +32,39 @@
                 Chimpanzee Test</a> and improved upon.
         </h3>
         <p id="game-description">
-
             This current build is based on an earlier concept, expect changes.
             <br/><br/>
-            Click the squares in order according to their numbers.
+            Click the squares that appear.
             <br/>
             The test will get progressively harder.
-
         </p>
     </section>
     <button id="hide-description-button" class="hide-button">Hide Description</button><br/>
     <hr/>
-    <div id="start-button-container" class="section-txt">
+	<div id="start-button-container" class="section-txt">
         <button id="start-button">Start</button>
+	</div>
+    <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
+    <div id="game-container">
+        <div id="game-board" class="game-field">
+            <!-- Game nodes will be generated inside this div -->
+        </div>
     </div>
-    <!--  Game -->
-    <div id="game-board">
-        <!-- Game nodes will be generated inside this div -->
+    <div id="secondary-game-container">
+        <p>
+            Animal
+            <br/>
+            <img src="MMM_IMAGES/AnimalsBW/Chicken_BW_waifu2x.png" alt="chicken wing chicken wing chicken macaroni">
+            <br/>
+            <form id="guess-form">
+                <label for="guessName">Guess:</label>
+                <input type="text" id="guessName" name="guessName">
+                <input type="submit" value="Submit"><br>
+                <span id="guess-result"></span> <!-- Add this span for displaying guess result -->
+            </form>
+        </p>
     </div>
-    <h3 id="game-message" class="section-txt">Click the button above to start the test</h3>
-    <hr/>
 </main>
-
 <script>
     // JavaScript code to toggle dark mode and store the preference
 	const toggleDarkMode = () => {
@@ -77,6 +85,79 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add("dark-mode");
     }
 });
+    // Function to calculate Levenshtein distance between two strings
+    function levenshteinDistance(a, b) {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+
+        const matrix = [];
+
+        // Initialize matrix with distances from empty string to a
+        for (let i = 0; i <= b.length; i++) {
+            matrix[i] = [i];
+        }
+
+        // Initialize matrix with distances from empty string to b
+        for (let j = 0; j <= a.length; j++) {
+            matrix[0][j] = j;
+        }
+
+        // Calculate distances
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1, // Substitution
+                        matrix[i][j - 1] + 1,     // Insertion
+                        matrix[i - 1][j] + 1      // Deletion
+                    );
+                }
+            }
+        }
+
+        return matrix[b.length][a.length];
+    }
+
+    function extractPictureName(url) {
+        const parts = url.split('/');
+        const filename = parts[parts.length - 1];
+        const nameWithoutExtension = filename.split('.')[0]; // Remove the file extension
+        
+        // Remove additional substrings from the name
+        const cleanedName = nameWithoutExtension.replace(/_(BW|C|waifu2x)/g, ''); // Replace "_BW", "_C", or "_waifu2x" with an empty string
+        return cleanedName.replace(/_/g, ' '); // Replace underscores with spaces
+    }
+
+    // Function to remove the word "the" from a string
+    function removeThe(text) {
+        return text.replace(/\bthe\b/gi, '').trim(); // Replace "the" (case insensitive) with an empty string and trim spaces
+    }
+
+    // Your existing script...
+
+    document.getElementById('guess-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevents the default form submission behavior
+
+        const originalGuess = document.getElementById('guessName').value.trim();
+        const guess = removeThe(originalGuess);
+        const imageUrl = document.querySelector('#secondary-game-container img').getAttribute('src');
+        const correctAnswer = removeThe(extractPictureName(imageUrl)); // Get the correct answer from the picture URL
+
+        const distance = levenshteinDistance(guess.toLowerCase(), correctAnswer.toLowerCase());
+        const maxAllowedDistance = 2; // Define maximum allowed distance for "close" feedback
+
+        if (distance === 0) {
+            document.getElementById('guess-result').textContent = "Your guess is correct!";
+        } else if (distance <= maxAllowedDistance) {
+            document.getElementById('guess-result').textContent = `Your guess "${originalGuess}" is close!`; // Display original guess
+        } else {
+            document.getElementById('guess-result').textContent = "Sorry, your guess is incorrect. Try again!";
+        }
+
+        document.getElementById('guessName').value = "";
+    });
 </script>
 </body>
 </html>

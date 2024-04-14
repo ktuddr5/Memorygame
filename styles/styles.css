@@ -31,6 +31,11 @@ p {
     font-size: 1.5rem;
 }
 
+img {
+    width: 270px; /* animal picture sizes  */
+    height: 270px;
+}
+
 /* Hyperlinks */
 a:link {
     color: var(--link-color);
@@ -69,7 +74,7 @@ a:hover {
 	border-width: 5px;
 	border-style:solid;
     border-color: #D4D4D4;
-	font-size: 0pt;
+	font-size: 15pt;
 }
 
 #start-button-container {
