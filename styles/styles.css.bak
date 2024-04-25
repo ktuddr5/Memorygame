@@ -32,8 +32,8 @@ p {
 }
 
 img {
-    width: 270px; /* You can adjust the width to your desired size */
-    height: 270px; /* You can adjust the height to your desired size */
+    width: 270px; /* animal picture sizes  */
+    height: 270px;
 }
 
 /* Hyperlinks */
@@ -67,6 +67,24 @@ a:hover {
     color: #D4D4D4;
     min-width: 20px;
     min-height: 30px;
+}
+.image-container {
+	position: relavite;
+	width: 50%;
+}
+.image-part {
+	width: 25%;
+	height: 25%;
+	overflow: hidden;
+    float: left;
+    position: relative;
+}
+.image-part img {
+	width: 200%; /* To cover the whole container */
+    height: 200%;
+    position: absolute;
+    top: -50%;
+    left: -50%;
 }
 
 #game-board > .node {

@@ -68,6 +68,10 @@ a:hover {
     min-width: 20px;
     min-height: 30px;
 }
+.part{
+	display: inline-block;
+	border: 1px solid black;
+}
 
 #game-board > .node {
 	border-radius: 10px;
