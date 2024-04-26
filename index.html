@@ -11,7 +11,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts/hide_section.js"></script>
-    <script src="scripts/mem_test.js"></script>
 
     <title>Chimp Test</title>
 </head>
@@ -85,79 +84,90 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add("dark-mode");
     }
 });
-    // Function to calculate Levenshtein distance between two strings
-    function levenshteinDistance(a, b) {
-        if (a.length === 0) return b.length;
-        if (b.length === 0) return a.length;
 
-        const matrix = [];
+// Function to calculate Levenshtein distance between two strings
+function levenshteinDistance(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
 
-        // Initialize matrix with distances from empty string to a
-        for (let i = 0; i <= b.length; i++) {
-            matrix[i] = [i];
-        }
+    const matrix = [];
 
-        // Initialize matrix with distances from empty string to b
-        for (let j = 0; j <= a.length; j++) {
-            matrix[0][j] = j;
-        }
+    // Initialize matrix with distances from empty string to a
+    for (let i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
+    }
 
-        // Calculate distances
-        for (let i = 1; i <= b.length; i++) {
-            for (let j = 1; j <= a.length; j++) {
-                if (b.charAt(i - 1) === a.charAt(j - 1)) {
-                    matrix[i][j] = matrix[i - 1][j - 1];
-                } else {
-                    matrix[i][j] = Math.min(
-                        matrix[i - 1][j - 1] + 1, // Substitution
-                        matrix[i][j - 1] + 1,     // Insertion
-                        matrix[i - 1][j] + 1      // Deletion
-                    );
-                }
+    // Initialize matrix with distances from empty string to b
+    for (let j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
+
+    // Calculate distances
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1, // Substitution
+                    matrix[i][j - 1] + 1,     // Insertion
+                    matrix[i - 1][j] + 1      // Deletion
+                );
             }
         }
-
-        return matrix[b.length][a.length];
     }
 
-    function extractPictureName(url) {
-        const parts = url.split('/');
-        const filename = parts[parts.length - 1];
-        const nameWithoutExtension = filename.split('.')[0]; // Remove the file extension
-        
-        // Remove additional substrings from the name
-        const cleanedName = nameWithoutExtension.replace(/_(BW|C|waifu2x|up)/g, ''); // Replace "_BW", "_C", or "_waifu2x" with an empty string
-        return cleanedName.replace(/_/g, ' '); // Replace underscores with spaces
+    return matrix[b.length][a.length];
+}
+
+function extractPictureName(url) {
+    const parts = url.split('/');
+    const filename = parts[parts.length - 1];
+    const nameWithoutExtension = filename.split('.')[0]; // Remove the file extension
+    
+    // Remove additional substrings from the name
+    const cleanedName = nameWithoutExtension.replace(/_(BW|C|waifu2x|up)/g, ''); // Replace "_BW", "_C", or "_waifu2x" with an empty string
+    return cleanedName.replace(/_/g, ' '); // Replace underscores with spaces
+}
+
+// Function to remove the word "the" from a string
+function removeThe(text) {
+    return text.replace(/\bthe\b/gi, '').trim(); // Replace "the" (case insensitive) with an empty string and trim spaces
+}
+
+// Add event listener to the guess form
+document.getElementById('guess-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevents the default form submission behavior
+
+    const originalGuess = document.getElementById('guessName').value.trim();
+    const guess = removeThe(originalGuess);
+    const imageUrl = document.querySelector('#secondary-game-container img').getAttribute('src');
+    const correctAnswer = removeThe(extractPictureName(imageUrl)); // Get the correct answer from the picture URL
+
+    const distance = levenshteinDistance(guess.toLowerCase(), correctAnswer.toLowerCase());
+    const maxAllowedDistance = 2; // Define maximum allowed distance for "close" feedback
+
+    if (distance === 0) {
+        document.getElementById('guess-result').textContent = "Your guess is correct!";
+    } else if (distance <= maxAllowedDistance) {
+        document.getElementById('guess-result').textContent = `Your guess "${originalGuess}" is close!`; // Display original guess
+    } else {
+        document.getElementById('guess-result').textContent = "Sorry, your guess is incorrect. Try again!";
     }
 
-    // Function to remove the word "the" from a string
-    function removeThe(text) {
-        return text.replace(/\bthe\b/gi, '').trim(); // Replace "the" (case insensitive) with an empty string and trim spaces
-    }
+    document.getElementById('guessName').value = "";
+});
 
-    // Your existing script...
+// Retrieve script option from query parameter
+const urlParams = new URLSearchParams(window.location.search);
+const scriptOption = urlParams.get('script');
 
-    document.getElementById('guess-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevents the default form submission behavior
-
-        const originalGuess = document.getElementById('guessName').value.trim();
-        const guess = removeThe(originalGuess);
-        const imageUrl = document.querySelector('#secondary-game-container img').getAttribute('src');
-        const correctAnswer = removeThe(extractPictureName(imageUrl)); // Get the correct answer from the picture URL
-
-        const distance = levenshteinDistance(guess.toLowerCase(), correctAnswer.toLowerCase());
-        const maxAllowedDistance = 2; // Define maximum allowed distance for "close" feedback
-
-        if (distance === 0) {
-            document.getElementById('guess-result').textContent = "Your guess is correct!";
-        } else if (distance <= maxAllowedDistance) {
-            document.getElementById('guess-result').textContent = `Your guess "${originalGuess}" is close!`; // Display original guess
-        } else {
-            document.getElementById('guess-result').textContent = "Sorry, your guess is incorrect. Try again!";
-        }
-
-        document.getElementById('guessName').value = "";
-    });
+// Load the selected script dynamically
+if (scriptOption) {
+    const scriptElement = document.createElement('script');
+    scriptElement.src = `scripts/${scriptOption}`;
+    document.head.appendChild(scriptElement);
+}
 </script>
 </body>
 </html>
