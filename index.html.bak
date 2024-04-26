@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts/hide_section.js"></script>
     <script src="scripts/mem_test.js"></script>
-
+	
     <title>Chimp Test</title>
 </head>
 <body>
@@ -54,76 +54,8 @@
         <p>
             Animal
             <br/>
-				<div class="container">
-					<!-- First row -->
-					<div class="part" id="part1">
-					<img src="MMM_IMAGES/AnimalsBW/Chicken_BW_up.png" alt="Part 1">
-					<img src="color_image.png" alt="Part 1 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part2">
-					<img src="MMM_IMAGES/AnimalsBW/Chicken_BW_up.png" alt="Part 2">
-					<img src="color_image.png" alt="Part 2 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part3">
-					<img src="black_white_image.png" alt="Part 3">
-					<img src="color_image.png" alt="Part 3 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part4">
-					<img src="black_white_image.png" alt="Part 4">
-					<img src="color_image.png" alt="Part 4 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part5">
-					<img src="black_white_image.png" alt="Part 5">
-					<img src="color_image.png" alt="Part 5 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part6">
-					<img src="black_white_image.png" alt="Part 6">
-					<img src="color_image.png" alt="Part 6 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part7">
-					<img src="black_white_image.png" alt="Part 7">
-					<img src="color_image.png" alt="Part 7 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part8">
-					<img src="black_white_image.png" alt="Part 8">
-					<img src="color_image.png" alt="Part 8 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part9">
-					<img src="black_white_image.png" alt="Part 9">
-					<img src="color_image.png" alt="Part 9 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part10">
-					<img src="black_white_image.png" alt="Part 10">
-					<img src="color_image.png" alt="Part 10 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part11">
-					<img src="black_white_image.png" alt="Part 11">
-					<img src="color_image.png" alt="Part 11 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part12">
-					<img src="black_white_image.png" alt="Part 12">
-					<img src="color_image.png" alt="Part 12 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part13">
-					<img src="black_white_image.png" alt="Part 13">
-					<img src="color_image.png" alt="Part 13 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part14">
-					<img src="black_white_image.png" alt="Part 14">
-					<img src="color_image.png" alt="Part 14 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part15">
-					<img src="black_white_image.png" alt="Part 15">
-					<img src="color_image.png" alt="Part 15 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-				<div class="part" id="part16">
-					<img src="black_white_image.png" alt="Part 16">
-					<img src="color_image.png" alt="Part 16 Colored" class="colored-image" style="opacity: 0;">
-				</div>
-  <!-- Repeat the above for the other rows and parts as needed -->
-</div>
+			<div id="imageParts"></div>
             <img src="MMM_IMAGES/AnimalsBW/Chicken_BW_up.png" alt="">
-			
             <br/>
             <form id="guess-form">
                 <label for="guessName">Guess:</label>
@@ -227,6 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('guessName').value = "";
     });
+	
+	// Coloured image stuff
 </script>
 	
 </script>

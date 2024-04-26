@@ -45,13 +45,6 @@ $(document).ready(function() {
         startButton.hide();
         startGame();
     });
-	readyButton.on("click", function() {
-    readyToStartNextLevel = true;
-    if (readyToStartNextLevel) {
-        startNextLevel(); // Call the function to start the next level
-        readyToStartNextLevel = false; // Reset the flag
-    }
-});
 	
     // Handle clicks on the game board
     $('#game-board').on("click", function() {
@@ -105,10 +98,11 @@ $(document).ready(function() {
 
 /* Main game loop */
 function playLevel(nodeNums) {
+
     let rollCopy = nodeNums.slice();
     let nextNodeOrder = generateNextLevel(level, rollCopy);
-    nodeOrder = nextNodeOrder;
-    renderLevelBoard(nextNodeOrder);
+	setTimeout(function() {     nodeOrder = nextNodeOrder;
+    renderLevelBoard(nextNodeOrder);   }, 1 * 1000);
 }
 
 
@@ -156,8 +150,8 @@ function renderLevelBoard(boardNodes) {
 
         // Disable click events for the first second
         boardNode.style.pointerEvents = "none";
-
-        // Switch colors after a delay
+	
+        // Switch colors after a delay          
         setTimeout(function() {
             // Toggle between two classes to switch colors
             if (boardNode.classList.contains("node-t-alternate")) {
