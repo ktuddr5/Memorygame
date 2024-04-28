@@ -64,14 +64,7 @@
 
 <script>
     // Function to start the game with selected script option and theme
-    function startGame() {
-        // Get the selected script option
-        var selectedScript = localStorage.getItem("selectedScript");
-        if (!selectedScript) {
-            alert("Please select a script option first.");
-            return;
-        }
-
+    function startGame(scriptOption) {
         // Get the selected theme
         var selectedTheme = localStorage.getItem("selectedTheme");
         if (!selectedTheme) {
@@ -80,7 +73,7 @@
         }
 
         // Redirect to index.html with selected script option and theme as query parameters
-        window.location.href = `index.html?script=${selectedScript}&theme=${selectedTheme}`;
+        window.location.href = `index.html?script=${scriptOption}&theme=${selectedTheme}`;
     }
 
     // Function to toggle options and themes sections
@@ -111,6 +104,7 @@
             darkModeButton.style.display = "none";
         }
     }
+
     function toggleDifficulty() {
         var difficultySection = document.getElementById("difficultyOptions");
         var optionsButton = document.getElementById("optionsButton");
@@ -134,6 +128,7 @@
             darkModeButton.style.display = "inline-block";
         }
     }
+
     // Function to toggle themes section and hide other buttons
     function toggleThemes() {
         var themesSection = document.querySelector(".theme-selection");
@@ -173,13 +168,20 @@
     }
 
     // Add event listeners to the buttons
-    document.getElementById("startButton").addEventListener("click", startGame);
+    document.getElementById("startButton").addEventListener("click", function() {
+        var selectedScript = localStorage.getItem("selectedScript");
+        if (!selectedScript) {
+            alert("Please select a script option first.");
+            return;
+        }
+        startGame(selectedScript);
+    });
     document.getElementById("optionsButton").addEventListener("click", toggleOptions);
     document.getElementById("darkModeButton").addEventListener("click", toggleDarkMode);
     document.getElementById("difficultyButton").addEventListener("click", toggleDifficulty);
     document.getElementById("themesButton").addEventListener("click", toggleThemes);
 
-    // Add event listeners to the difficulty option buttons
+    // Add event listeners to the script option buttons
     document.getElementById("orderMattersButton").addEventListener("click", function () {
         localStorage.setItem("selectedScript", this.getAttribute("data-script"));
     });
@@ -201,6 +203,5 @@
         }
     });
 </script>
-
 </body>
 </html>

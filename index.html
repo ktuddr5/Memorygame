@@ -9,10 +9,9 @@
     <link href="styles/styles.css" rel="stylesheet"/>
     <link href="styles/layout.css" rel="stylesheet"/>
 
-	<script src="scripts/imageSplitter.js"></script>
+    <script src="scripts/imageSplitter.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts/hide_section.js"></script>
-    <script src="scripts/mem_test.js"></script>
 	
 
 
@@ -45,11 +44,11 @@
     </section>
     <button id="hide-description-button" class="hide-button">Hide Description</button><br/>
     <hr/>
-	<div id="start-button-container" class="section-txt">
+    <div id="start-button-container" class="section-txt">
         <button id="start-button">Start</button>
-	</div>
+    </div>
 	
-        <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
+    <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
 
     <div id="game-container">
         <div id="game-board" class="game-field">
@@ -59,8 +58,7 @@
 
     <div id="secondary-game-container">
         <div class="image-container">
-		
-            <img src="MMM_IMAGES\AnimalsBW\Chicken_BW_up.png" style="position: absolute;">
+            <img id="themeImage" style="position: absolute;">
             <!-- Define each part with adjusted background positioning -->
             <div class="part1" style="; background-position: 0% 0%;"></div>
             <div class="part2" style="; background-position: 33% 0%;"></div>
@@ -80,16 +78,12 @@
             <div class="part16" style="; background-position: 100% 100%;"></div>
         </div>
         <p>
-
             <span id="themeText">Animal</span>
-            <br/>
-            <img id="themeImage" src="" alt="Theme Image">
-            <br/>
             <form id="guess-form">
                 <label for="guessName">Guess:</label>
                 <input type="text" id="guessName" name="guessName">
                 <input type="submit" value="Submit"><br>
-                <span id="guess-result"></span> <!-- Add this span for displaying guess result -->
+                <span id="guess-result"></span>
             </form>
         </p>
     </div>
@@ -102,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadThemeImage = (theme) => {
         // Define image filenames for each theme
         const themeImages = {
-            'AnimalsBW': ['Pig_BW_up.png', 'Another_Animal_Image.png'],
-            'FoodBW': ['Donut_BW_up.png', 'Another_Food_Image.png'],
-            'ObjectsBW': ['Skull_BW_up.png', 'Another_Object_Image.png'],
+            'AnimalsBW': ['Chicken_BW_up.png', 'Another_Animal_Image.png'],
+            'FoodBW': ['Broccoli_BW_up.png', 'Another_Food_Image.png'],
+            'ObjectsBW': ['Magnet_BW_up.png', 'Another_Object_Image.png'],
         };
 
         // Get the image filenames for the selected theme
@@ -139,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
     // JavaScript code to toggle dark mode and store the preference
-	const toggleDarkMode = () => {
+    const toggleDarkMode = () => {
         document.body.classList.toggle('dark-mode');
         const darkModeEnabled = document.body.classList.contains("dark-mode");
         localStorage.setItem("darkModeEnabled", darkModeEnabled);
@@ -230,10 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('guessName').value = "";
     });
-	
-	// Coloured image stuff
+
+    	// Coloured image stuff
 	    // Define the array of image paths
-    var imagePaths = [
+        var imagePaths = [
         'MMM_IMAGES\AnimalsBW\Chicken_BW_up.png',
         'MMM_IMAGES\AnimalsBW\Panda_BW_up.png',
         'MMM_IMAGES\AnimalsBW\ig_BW_up.png',
@@ -259,8 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
     testImage.src = imagePaths[testImageIndex];
 
     // Append the test image to the document body for display
-    document.getElementById('testImageContainer').appendChild(testImage);
-	
+    //document.getElementById('imagePaths').appendChild(testImage);
+
+
+
+
 
     // Retrieve script option from query parameter
     const urlParams = new URLSearchParams(window.location.search);
