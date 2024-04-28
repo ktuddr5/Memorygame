@@ -14,6 +14,8 @@
     <script src="scripts/hide_section.js"></script>
     <script src="scripts/mem_test.js"></script>
 	
+
+
     <title>Chimp Test</title>
 </head>
 <body>
@@ -57,7 +59,8 @@
 
     <div id="secondary-game-container">
         <div class="image-container">
-		<img id="game-image" src="" style="position: absolute;">
+		
+            <img src="MMM_IMAGES\AnimalsBW\Chicken_BW_up.png" style="position: absolute;">
             <!-- Define each part with adjusted background positioning -->
             <div class="part1" style="; background-position: 0% 0%;"></div>
             <div class="part2" style="; background-position: 33% 0%;"></div>
@@ -77,6 +80,11 @@
             <div class="part16" style="; background-position: 100% 100%;"></div>
         </div>
         <p>
+
+            <span id="themeText">Animal</span>
+            <br/>
+            <img id="themeImage" src="" alt="Theme Image">
+            <br/>
             <form id="guess-form">
                 <label for="guessName">Guess:</label>
                 <input type="text" id="guessName" name="guessName">
@@ -86,26 +94,70 @@
         </p>
     </div>
 </main>
+
+<!-- Theme image script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Function to load the image and update text for the selected theme
+    const loadThemeImage = (theme) => {
+        // Define image filenames for each theme
+        const themeImages = {
+            'AnimalsBW': ['Pig_BW_up.png', 'Another_Animal_Image.png'],
+            'FoodBW': ['Donut_BW_up.png', 'Another_Food_Image.png'],
+            'ObjectsBW': ['Skull_BW_up.png', 'Another_Object_Image.png'],
+        };
+
+        // Get the image filenames for the selected theme
+        const images = themeImages[theme];
+        if (!images || images.length === 0) {
+            console.error('No images found for the selected theme:', theme);
+            return;
+        }
+
+        // Set the image source to the first image in the list
+        const directoryPath = `MMM_IMAGES/${theme}/`; // Define the directory path
+        document.getElementById('themeImage').src = directoryPath + images[0];
+
+        // Update the text based on the selected theme
+        const themeText = {
+            'AnimalsBW': 'Animal',
+            'FoodBW': 'Food',
+            'ObjectsBW': 'Object',
+        };
+        document.getElementById('themeText').textContent = themeText[theme];
+    };
+
+    // Retrieve the selected theme from the query parameter
+    const selectedTheme = new URLSearchParams(window.location.search).get('theme');
+
+    // Load the image and update text for the selected theme
+    if (selectedTheme) {
+        loadThemeImage(selectedTheme);
+    }
+});
+</script>
+
 <script>
     // JavaScript code to toggle dark mode and store the preference
 	const toggleDarkMode = () => {
-    document.body.classList.toggle('dark-mode');
-    const darkModeEnabled = document.body.classList.contains("dark-mode");
-    localStorage.setItem("darkModeEnabled", darkModeEnabled);
-};
+        document.body.classList.toggle('dark-mode');
+        const darkModeEnabled = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkModeEnabled", darkModeEnabled);
+    };
 
-document.addEventListener('DOMContentLoaded', () => {
-    const darkModeButton = document.createElement('button');
-    darkModeButton.textContent = 'Toggle Dark Mode';
-    darkModeButton.addEventListener('click', toggleDarkMode);
-    document.body.insertBefore(darkModeButton, document.body.firstChild);
+    document.addEventListener('DOMContentLoaded', () => {
+        const darkModeButton = document.createElement('button');
+        darkModeButton.textContent = 'Toggle Dark Mode';
+        darkModeButton.addEventListener('click', toggleDarkMode);
+        document.body.insertBefore(darkModeButton, document.body.firstChild);
 
-    // Retrieve dark mode preference from local storage on page load
-    const darkModeEnabled = localStorage.getItem("darkModeEnabled");
-    if (darkModeEnabled === "true") {
-      document.body.classList.add("dark-mode");
-    }
-});
+        // Retrieve dark mode preference from local storage on page load
+        const darkModeEnabled = localStorage.getItem("darkModeEnabled");
+        if (darkModeEnabled === "true") {
+            document.body.classList.add("dark-mode");
+        }
+    });
+
     // Function to calculate Levenshtein distance between two strings
     function levenshteinDistance(a, b) {
         if (a.length === 0) return b.length;
@@ -145,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const parts = url.split('/');
         const filename = parts[parts.length - 1];
         const nameWithoutExtension = filename.split('.')[0]; // Remove the file extension
-        
+
         // Remove additional substrings from the name
         const cleanedName = nameWithoutExtension.replace(/_(BW|C|waifu2x|up)/g, ''); // Replace "_BW", "_C", or "_waifu2x" with an empty string
         return cleanedName.replace(/_/g, ' '); // Replace underscores with spaces
@@ -156,8 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/\bthe\b/gi, '').trim(); // Replace "the" (case insensitive) with an empty string and trim spaces
     }
 
-    // Your existing script...
-
+    // Add event listener to the guess form
     document.getElementById('guess-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevents the default form submission behavior
 
@@ -215,6 +266,19 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 </script>
 	
+
+
+    // Retrieve script option from query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const scriptOption = urlParams.get('script');
+
+    // Load the selected script dynamically
+    if (scriptOption) {
+        const scriptElement = document.createElement('script');
+        scriptElement.src = `scripts/${scriptOption}`;
+        document.head.appendChild(scriptElement);
+    }
+
 </script>
 </body>
 </html>
