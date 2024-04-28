@@ -10,41 +10,7 @@ let level = 2;
 let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
-
-// BW image array
-var imagePaths = [
-    '..\MMM_IMAGES\AnimalsBW\Chicken_BW_up.png',
-    'MMM_IMAGES\AnimalsBW\Panda_BW_up.png',
-    'MMM_IMAGES\AnimalsBW\ig_BW_up.png',
-    'MMM_IMAGES\AnimalsBW\Squirrel_BW_up.png',
-    'MMM_IMAGES\AnimalsBW\Woodpecker_BW_up.png',
-    'MMM_IMAGES\FoodBW\Broccoli_BW_up.png',
-    'MMM_IMAGES\FoodBW\Donut_BW_up.png',
-    'MMM_IMAGES\FoodBW\Kiwi_BW_up.png',
-    'MMM_IMAGES\FoodBW\Pear_BW_up.png',
-    'MMM_IMAGES\FoodBW\Pizza_BW_up.png',
-    'MMM_IMAGES\ObjectsBW\Magnet_BW_up.png',
-    'MMM_IMAGES\ObjectsBW\Pencil_BW_up.png',
-    'MMM_IMAGES\ObjectsBW\Ping_Pong_BW_up.png',
-    'MMM_IMAGES\ObjectsBW\Screwdriver_BW_up.png',
-    'MMM_IMAGES\ObjectsBW\Skull_BW_up.png'
-];
-
-// Get the image element by its ID
-var imageElement = document.getElementById('game-image');
-
-// Generate a random number between 1 and 16
-//var randomNumber = Math.floor(Math.random() * 16) + 1;
-
-// Use the random number to select an image path from the imagePaths array
-//var imagePath = imagePaths[randomNumber - 1]; // Subtract 1 to adjust for array indexing
-
-// Set the src attribute of the image to the selected image path
-imageElement.src = imagePath[0];
-
-
-
-
+let imagecoloring = 0;
 
 // Given image
 let image = [
@@ -65,6 +31,13 @@ let image = [
     [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
 ];
+// Split the image into 4x4 sections
+const sections = splitImageIntoSections(image);
+const unsorted = sections.slice();
+    // Sort sections ascending
+    sections.sort((a, b) => countOnes(a.data) - countOnes(b.data));
+
+
 function splitGameField() {
     // Here you can write logic to split the game field into two sections
     // For example, you can create another <div> and append it to the main container
@@ -74,7 +47,9 @@ function splitGameField() {
 $(document).ready(function() {
     let startButton = $("#start-button");
     let startButtonContainer = $("#start-button-container");
-	let readyButton = $("#ready-button");
+	
+	
+	
     // Hide "Start" button when pressed
     startButtonContainer.on("click", "#start-button", function() {
         startButton.hide();
@@ -139,7 +114,6 @@ function playLevel(nodeNums) {
     setTimeout(function() {     
         nodeOrder = nextNodeOrder;
         renderLevelBoard(nextNodeOrder);
-        adjustOpacityForCurrentPart(sections); // Pass the sections array as an argument
     }, 2 * 1000);
 }
 
@@ -149,14 +123,11 @@ function generateNextLevel(levelNum, nodeNums) {
     emptyBoard(defaultBoard);
     let nodesToRender = [];
 
-    // Split the image into 4x4 sections
-    const sections = splitImageIntoSections(image);
-    // Sort sections ascending
-    sections.sort((a, b) => countOnes(a.data) - countOnes(b.data));
-
+adjustOpacityForCurrentPart(unsorted); // Pass the sections array as an argument
     // Skip empty sections
     while (leveltemp < sections.length && countOnes(sections[leveltemp].data) === 0) {
         leveltemp++;
+		imagecoloring++;
     }
 
     if (leveltemp < sections.length) {
@@ -170,8 +141,10 @@ function generateNextLevel(levelNum, nodeNums) {
         }
         leveltemp++;
     }
-    
+	
+	imagecoloring++;
     currentOrder = 0; // Reset currentOrder
+	
     return nodesToRender;
 }
 function renderLevelBoard(boardNodes) {
@@ -285,14 +258,27 @@ function countOnes(section) {
 
 function adjustOpacityForCurrentPart(sections) {
     // Set the opacity of the current part being played to 0.1
-    var currentPart = "part" + nodeOrder[currentOrder]; // Assuming nodeOrder holds the index of the current part being played
+    var currentPart = "part" + findCurrentNumber(); // Assuming nodeOrder holds the index of the current part being played
     var currentDiv = document.querySelector("." + currentPart);
     if (currentDiv) {
         // Find the section corresponding to the current part
         var section = sections.find(sec => sec.part === currentPart);
         if (section) {
             // If the section is found, set the opacity of the corresponding div
-            currentDiv.style.opacity = 0.4;
+            currentDiv.style.opacity = 0.9;
         }
     }
+}
+
+function findCurrentNumber() {
+	let CurrentNumber = 0;
+
+	for(let i = 0; i < sections.length; i++)
+	{
+		if(sections[imagecoloring-1].part === unsorted[i].part)
+		{
+			return i+1;
+		}
+	}
+	return CurrentNumber;
 }

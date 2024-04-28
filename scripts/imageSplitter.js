@@ -1,4 +1,4 @@
-// Define an array of image paths
+/*/ Define an array of image paths
 var imagePaths = [
     'MMM_IMAGES/AnimalsC/Chicken_C_up.png',
     'MMM_IMAGES/AnimalsC/Panda_C_up.png',
@@ -167,4 +167,4 @@ getPixelArraysFor16x16Images(imagePaths16, function(pixelArrays) {
     // You can do further processing with the array of pixel arrays here...
 });
 
-
+*/
