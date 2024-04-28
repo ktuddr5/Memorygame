@@ -1,107 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Title Screen</title>
-<link rel="stylesheet" type="text/css" href="styles/app.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Screen</title>
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap">
 </head>
 <body>
 
 <div class="container">
-  <!-- Brown half with title -->
-  <div class="first-half">
-    <h1>Mosaic Memory Master</h1>
-    <img src="overlay.png" alt="Background Image" class="background-image">
-  </div>
+    <!-- Brown half with title -->
+    <div class="first-half">
+        <h1>Mosaic Memory Master</h1>
+        <img src="overlay.png" alt="Background Image" class="background-image">
+    </div>
 
-  <!-- Gray half with buttons -->
-  <div class="second-half">
-    <div class="button-container">
-      <button id="startButton">PLAY</button>
-      <button id="optionsButton">OPTIONS</button>
+    <!-- Gray half with buttons -->
+    <div class="second-half">
+        <div class="button-container">
+            <button id="startButton">PLAY</button>
+            <button id="optionsButton">OPTIONS</button>
+        </div>
+        <!-- Options section (initially hidden) -->
+        <div id="optionsSection" style="display: none;">
+            <div class="option">
+                <button id="difficultyButton">Difficulty</button>
+            </div>
+            <div id="difficultyOptions" style="display: none;">
+                <div id="topOptions">
+                    <button id="1stOption">1</button>
+                    <button id="2stOption">2</button>
+                    <button id="3stOption">3</button>
+                    <button id="4stOption">4</button>
+                    <button id="5stOption">5</button>
+                </div>
+                <div id="bottomOptions" class="option2">
+                    <button id="orderMattersButton" data-script="mem_test_order.js">Order Matters</button>
+                    <button id="orderDoesntMatterButton" data-script="mem_test.js">Order Doesn't Matter</button>
+                </div>
+            </div>
+            <div class="option">
+                <button id="themesButton">Themes</button>
+            </div>
+            <!-- Theme selection (initially hidden) -->
+            <div class="theme-selection" style="display: none;">
+                <div>
+                    <button class="theme-button" id="animalsTheme" data-theme="AnimalsBW">Animals</button>
+                </div>
+                <div>
+                    <button class="theme-button" id="foodTheme" data-theme="FoodBW">Food</button>
+                </div>
+                <div>
+                    <button class="theme-button" id="objectsTheme" data-theme="ObjectsBW">Objects</button>
+                </div>
+            </div>
+            <div class="option">
+                <button id="darkModeButton">Dark Mode</button>
+            </div>
+        </div>
     </div>
-    <!-- Options section (initially hidden) -->
-    <div id="optionsSection" style="display: none;">
-      <div class="option">
-        <button id="difficultyButton">Difficulty</button>
-      </div>
-      <!-- Difficulty selection section (initially hidden) -->
-      <div id="difficultyOptions" style="display: none;">
-        <button id="1stOption">1</button>
-        <button id="2stOption">2</button>
-        <button id="3stOption">3</button>
-        <button id="4stOption">4</button>
-        <button id="5stOption">5</button>
-      </div>
-      <div class="option">
-        <button id="darkModeButton">Dark Mode</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
-  // Function to start the game
-  function startGame() {
-    // Redirect to index.html
-    window.location.href = "index.html";
-  }
+    // Function to start the game with selected script option and theme
+    function startGame() {
+        // Get the selected script option
+        var selectedScript = localStorage.getItem("selectedScript");
+        if (!selectedScript) {
+            alert("Please select a script option first.");
+            return;
+        }
 
-  // Function to toggle options section
-  function toggleOptions() {
-    var optionsSection = document.getElementById("optionsSection");
-    var optionsButton = document.getElementById("optionsButton");
-    if (optionsSection.style.display === "none") {
-      optionsSection.style.display = "flex";
-      optionsSection.style.flexDirection = "column";
-      optionsSection.style.alignItems = "center";
-      optionsButton.style.backgroundColor = "#C0C0C0";
-      optionsButton.style.color = "#A9A9A9";
-    } else {
-      optionsSection.style.display = "none";
-      optionsButton.style.color = "#fff";
-      optionsButton.style.backgroundColor = "#602a2a";
+        // Get the selected theme
+        var selectedTheme = localStorage.getItem("selectedTheme");
+        if (!selectedTheme) {
+            alert("Please select a theme first.");
+            return;
+        }
+
+        // Redirect to index.html with selected script option and theme as query parameters
+        window.location.href = `index.html?script=${selectedScript}&theme=${selectedTheme}`;
     }
-  }
 
-  // Function to toggle difficulty options section
-  function toggleDifficulty() {
-    var difficultySection = document.getElementById("difficultyOptions");
-    var difficultyButton = document.getElementById("difficultyButton");
-    if (difficultySection.style.display === "none") {
-      difficultySection.style.display = "block";
-      difficultyButton.style.backgroundColor = "#C0C0C0";
-      difficultyButton.style.color = "#A9A9A9";
-      difficultyButton.style.width = "245px";
-    } else {
-      difficultySection.style.display = "none";
-      difficultyButton.style.color = "#fff";
-      difficultyButton.style.backgroundColor = "#602a2a";
+    // Function to toggle options and themes sections
+    function toggleOptions() {
+        var optionsSection = document.getElementById("optionsSection");
+        var themesButton = document.getElementById("themesButton");
+        var startButton = document.getElementById("startButton");
+        var difficultyButton = document.getElementById("difficultyButton");
+        var darkModeButton = document.getElementById("darkModeButton");
+
+        if (optionsSection.style.display === "none") {
+            optionsSection.style.display = "flex";
+            optionsSection.style.flexDirection = "column";
+            optionsSection.style.alignItems = "center";
+            // Hide play button
+            startButton.style.display = "none";
+            // Show other buttons
+            themesButton.style.display = "inline-block";
+            difficultyButton.style.display = "inline-block";
+            darkModeButton.style.display = "inline-block";
+        } else {
+            optionsSection.style.display = "none";
+            // Show play button
+            startButton.style.display = "inline-block";
+            // Hide other buttons
+            themesButton.style.display = "none";
+            difficultyButton.style.display = "none";
+            darkModeButton.style.display = "none";
+        }
     }
-  }
+    function toggleDifficulty() {
+        var difficultySection = document.getElementById("difficultyOptions");
+        var optionsButton = document.getElementById("optionsButton");
+        var startButton = document.getElementById("startButton");
+        var themesButton = document.getElementById("themesButton");
+        var darkModeButton = document.getElementById("darkModeButton");
 
-  // Function to toggle dark mode and store the preference
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    const darkModeEnabled = document.body.classList.contains("dark-mode");
-    localStorage.setItem("darkModeEnabled", darkModeEnabled);
-  }
-
-  // Add event listeners to the buttons
-  document.getElementById("startButton").addEventListener("click", startGame);
-  document.getElementById("optionsButton").addEventListener("click", toggleOptions);
-  document.getElementById("darkModeButton").addEventListener("click", toggleDarkMode);
-  document.getElementById("difficultyButton").addEventListener("click", toggleDifficulty);
-
-  // Retrieve dark mode preference from local storage on page load
-  document.addEventListener("DOMContentLoaded", function() {
-    const darkModeEnabled = localStorage.getItem("darkModeEnabled");
-    if (darkModeEnabled === "true") {
-      document.body.classList.add("dark-mode");
+        if (difficultySection.style.display === "none") {
+            difficultySection.style.display = "block";
+            // Hide other buttons
+            optionsButton.style.display = "none";
+            startButton.style.display = "none";
+            themesButton.style.display = "none";
+            darkModeButton.style.display = "none";
+        } else {
+            difficultySection.style.display = "none";
+            // Show the options button and hide other buttons except the play button
+            optionsButton.style.display = "inline-block";
+            startButton.style.display = "none";
+            themesButton.style.display = "inline-block";
+            darkModeButton.style.display = "inline-block";
+        }
     }
-  });
+    // Function to toggle themes section and hide other buttons
+    function toggleThemes() {
+        var themesSection = document.querySelector(".theme-selection");
+        var optionsButton = document.getElementById("optionsButton");
+        var startButton = document.getElementById("startButton");
+        var difficultyButton = document.getElementById("difficultyButton");
+        var darkModeButton = document.getElementById("darkModeButton");
+
+        if (themesSection.style.display === "none") {
+            themesSection.style.display = "block";
+            // Hide other buttons
+            optionsButton.style.display = "none";
+            startButton.style.display = "none";
+            difficultyButton.style.display = "none";
+            darkModeButton.style.display = "none";
+        } else {
+            themesSection.style.display = "none";
+            // Show the options button and hide other buttons except the play button
+            optionsButton.style.display = "inline-block";
+            startButton.style.display = "none";
+            difficultyButton.style.display = "inline-block";
+            darkModeButton.style.display = "inline-block";
+        }
+    }
+
+    // Function to toggle dark mode and store the preference
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+        const darkModeEnabled = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkModeEnabled", darkModeEnabled);
+    }
+
+    // Function to handle theme selection
+    function selectTheme() {
+        var selectedTheme = this.getAttribute("data-theme");
+        localStorage.setItem("selectedTheme", selectedTheme);
+    }
+
+    // Add event listeners to the buttons
+    document.getElementById("startButton").addEventListener("click", startGame);
+    document.getElementById("optionsButton").addEventListener("click", toggleOptions);
+    document.getElementById("darkModeButton").addEventListener("click", toggleDarkMode);
+    document.getElementById("difficultyButton").addEventListener("click", toggleDifficulty);
+    document.getElementById("themesButton").addEventListener("click", toggleThemes);
+
+    // Add event listeners to the difficulty option buttons
+    document.getElementById("orderMattersButton").addEventListener("click", function () {
+        localStorage.setItem("selectedScript", this.getAttribute("data-script"));
+    });
+    document.getElementById("orderDoesntMatterButton").addEventListener("click", function () {
+        localStorage.setItem("selectedScript", this.getAttribute("data-script"));
+    });
+
+    // Add event listeners to theme buttons
+    var themeButtons = document.querySelectorAll(".theme-button");
+    themeButtons.forEach(function(button) {
+        button.addEventListener("click", selectTheme);
+    });
+
+    // Retrieve dark mode preference from local storage on page load
+    document.addEventListener("DOMContentLoaded", function () {
+        const darkModeEnabled = localStorage.getItem("darkModeEnabled");
+        if (darkModeEnabled === "true") {
+            document.body.classList.add("dark-mode");
+        }
+    });
 </script>
 
 </body>
