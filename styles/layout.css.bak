@@ -1,11 +1,11 @@
 #game-container {
     float: left;
-    width: 40%;
+    width: 50%;
 }
 
 #secondary-game-container {
     float: right;
-    width: 40%;
+    width: 50%;
 }
 
 #game-board {
@@ -97,3 +97,79 @@
 .dark-mode #game-board > .node {
     border-color: #1D1D1D; /* Adjust border color */
 }
+
+
+
+.image-container {
+    width: 100%; /* Adjust the width of the container */
+    height: 100%; /* Adjust the height of the container */
+    background-image: url('FoodC\Chicken_C_up.png',); /* Replace 'your-image.png' with the path to your PNG image */
+    background-size: 400% 400%; /* Set background size to 400% to accommodate 16 equal parts */
+}
+
+/* Define styles for each part */
+.part1, .part2, .part3, .part4,
+.part5, .part6, .part7, .part8,
+.part9, .part10, .part11, .part12,
+.part13, .part14, .part15, .part16 {
+    width: 25%; /* Each part occupies 25% of the container's width */
+    height: 25%; /* Each part occupies 25% of the container's height */
+    float: left; /* Float the parts to arrange them horizontally */
+    background-repeat: no-repeat; /* Prevent background from repeating */
+}
+
+/* Set background position for each part */
+.part1 {
+    background-position: 0% 0%;
+}
+.part2 {
+    background-position: 25% 0%;
+}
+.part3 {
+    background-position: 50% 0%;
+}
+.part4 {
+    background-position: 75% 0%;
+}
+.part5 {
+    background-position: 0% 25%;
+}
+.part6 {
+    background-position: 25% 25%;
+}
+.part7 {
+    background-position: 50% 25%;
+}
+.part8 {
+    background-position: 75% 25%;
+}
+.part9 {
+    background-position: 0% 50%;
+}
+.part10 {
+    background-position: 25% 50%;
+}
+.part11 {
+    background-position: 50% 50%;
+}
+.part12 {
+    background-position: 75% 50%;
+}
+.part13 {
+    background-position: 0% 75%;
+}
+.part14 {
+    background-position: 25% 75%;
+}
+.part15 {
+    background-position: 50% 75%;
+}
+.part16 {
+    background-position: 75% 75%;
+}
+
+/* Add background positions for parts 5 to 16 similarly */
+/* Example: */
+/*.part5 {
+    background-position: 0% 25%;
+}*/

@@ -32,8 +32,9 @@ p {
 }
 
 img {
-    width: 270px; /* animal picture sizes  */
-    height: 270px;
+    width: 256px; /* animal picture sizes  */
+    height: 256px;
+	opacity: 1;
 }
 
 /* Hyperlinks */
@@ -67,6 +68,36 @@ a:hover {
     color: #D4D4D4;
     min-width: 20px;
     min-height: 30px;
+}
+
+/* Define styles for the container */
+.image-container {
+    width: 256px; /* Adjust the width of the container */
+    height: 256px; /* Adjust the height of the container */
+    position: relative; /* Position the parts relative to the container */
+    border: 10px solid black; /* Add a border for visual clarity */
+}
+.part1, .part2, .part3, .part4,
+.part5, .part6, .part7, .part8,
+.part9, .part10, .part11, .part12,
+.part13, .part14, .part15, .part16 {
+width: 25%; /* Each part occupies 25% of the container's width */
+height: 25%; /* Each part occupies 25% of the container's height */
+float: left; /* Float the parts to arrange them horizontally */
+background-repeat: no-repeat; /* Prevent background from repeating */
+background-size: 400% 400%;
+background-image: url('../MMM_IMAGES/AnimalsC/Chicken_C_up.png');
+opacity: 0.1;
+}
+
+
+#imagePartsContainer {
+	width: 270px; /* animal picture sizes  */
+    height: 270px;
+    margin: 20px; /* Add some margin around the container */
+    border: 1px solid black; /* Add a border around the container */
+    padding: 10px; /* Add some padding inside the container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 #game-board > .node {

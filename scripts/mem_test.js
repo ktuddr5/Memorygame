@@ -10,6 +10,7 @@ let level = 2;
 let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
+let imagecoloring = 0;
 
 // Given image
 let image = [
@@ -30,6 +31,13 @@ let image = [
     [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
 ];
+// Split the image into 4x4 sections
+const sections = splitImageIntoSections(image);
+const unsorted = sections.slice();
+    // Sort sections ascending
+    sections.sort((a, b) => countOnes(a.data) - countOnes(b.data));
+
+
 function splitGameField() {
     // Here you can write logic to split the game field into two sections
     // For example, you can create another <div> and append it to the main container
@@ -39,11 +47,20 @@ function splitGameField() {
 $(document).ready(function() {
     let startButton = $("#start-button");
     let startButtonContainer = $("#start-button-container");
-
+	
+	
+	
     // Hide "Start" button when pressed
     startButtonContainer.on("click", "#start-button", function() {
         startButton.hide();
         startGame();
+    });
+	
+    // Handle clicks on the game board
+    $('#game-board').on("click", function() {
+        if (!gameOver) {
+            startNextLevel(); // Start generating next level if game is not over
+        }
     });
 
     /*
@@ -90,11 +107,14 @@ $(document).ready(function() {
 });
 
 /* Main game loop */
+
 function playLevel(nodeNums) {
     let rollCopy = nodeNums.slice();
     let nextNodeOrder = generateNextLevel(level, rollCopy);
-    nodeOrder = nextNodeOrder;
-    renderLevelBoard(nextNodeOrder);
+    setTimeout(function() {     
+        nodeOrder = nextNodeOrder;
+        renderLevelBoard(nextNodeOrder);
+    }, 2 * 1000);
 }
 
 
@@ -102,35 +122,32 @@ function playLevel(nodeNums) {
 function generateNextLevel(levelNum, nodeNums) {
     emptyBoard(defaultBoard);
     let nodesToRender = [];
+
+
+    // Skip empty sections
+    while (leveltemp < sections.length && countOnes(sections[leveltemp].data) === 0) {
+        leveltemp++;
+		imagecoloring++;
+		adjustOpacityForCurrentPart(unsorted); // Pass the sections array as an argument
+    }
+	adjustOpacityForCurrentPart(unsorted); // Pass the sections array as an argument
+    if (leveltemp < sections.length) {
+        for (let y = 0; y < sections[leveltemp].data.length; y++) {
+            for (let x = 0; x < sections[leveltemp].data[y].length; x++) {
+                if (sections[leveltemp].data[y][x] === 1) {
+                    nodesToRender.push(nodeNums[x + y * sections[leveltemp].data[y].length]);
+                    levelNum--;
+                }
+            }
+        }
+        leveltemp++;
+    }
 	
-	// Split the image into 4x4 sections
-	const sections = splitImageIntoSections(image);
-	// Sort sections ascending
-	sections.sort((a, b) => countOnes(a) - countOnes(b));
-	// Skip empty sections
-	while(countOnes(sections[leveltemp]) === 0)
-	{
-		leveltemp++;
-	}
+	imagecoloring++;
+    currentOrder = 0; // Reset currentOrder
 	
-	if (leveltemp < 16)
-	for(let y = 0; y < sections[leveltemp].length; y++)
-	{
-		for (let x = 0; x < sections[leveltemp][y].length; x++)
-		{
-			if(sections[leveltemp][y][x] === 1)
-			{
-				nodesToRender.push(nodeNums[x+y*sections[leveltemp][y].length]);
-				levelNum--;
-			}
-			
-		}
-		
-	}
-	leveltemp++;
     return nodesToRender;
 }
-
 function renderLevelBoard(boardNodes) {
     for (let i = 0; i < boardNodes.length; i++) {
         let boardNode = document.getElementById(boardNodes[i].toString());
@@ -142,8 +159,8 @@ function renderLevelBoard(boardNodes) {
 
         // Disable click events for the first second
         boardNode.style.pointerEvents = "none";
-
-        // Switch colors after a delay
+	
+        // Switch colors after a delay          
         setTimeout(function() {
             // Toggle between two classes to switch colors
             if (boardNode.classList.contains("node-t-alternate")) {
@@ -183,7 +200,7 @@ function endGame(score) {
             "<h2> You have reached the maximum score of " + (score - 1).toString() + "</h2>";
     } else {
         gameMessage.innerHTML =
-            "<h2> Your score is " + (score - 1).toString() + ". Try again to beat your score! </h2>";
+            "<h2> Your current score is " + (score - 1).toString() + ". Continue? </h2>";
     }
 }
 
@@ -198,6 +215,7 @@ function resetAll() {
 
 function splitImageIntoSections(image) {
     const sections = [];
+    let partNumber = 1;
 
     // Iterate over the image in steps of 4 pixels both horizontally and vertically
     for (let y = 0; y < image.length; y += 4) {
@@ -214,7 +232,10 @@ function splitImageIntoSections(image) {
                 }
                 section.push(row);
             }
-            sections.push(section);
+            
+            // Push section along with part number to sections array
+            sections.push({ part: "part" + partNumber, data: section });
+            partNumber++;
         }
     }
     return sections;
@@ -234,4 +255,31 @@ function countOnes(section) {
         }
     }
     return count;
+}
+
+function adjustOpacityForCurrentPart(sections) {
+    // Set the opacity of the current part being played to 0.1
+    var currentPart = "part" + findCurrentNumber(); // Assuming nodeOrder holds the index of the current part being played
+    var currentDiv = document.querySelector("." + currentPart);
+    if (currentDiv) {
+        // Find the section corresponding to the current part
+        var section = sections.find(sec => sec.part === currentPart);
+        if (section) {
+            // If the section is found, set the opacity of the corresponding div
+            currentDiv.style.opacity = 0.9;
+        }
+    }
+}
+
+function findCurrentNumber() {
+	let CurrentNumber = 0;
+
+	for(let i = 0; i < sections.length; i++)
+	{
+		if(sections[imagecoloring-1].part === unsorted[i].part)
+		{
+			return i+1;
+		}
+	}
+	return CurrentNumber;
 }
