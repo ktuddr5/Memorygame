@@ -32,12 +32,9 @@ p {
 }
 
 img {
-    width: 270px; /* animal picture sizes  */
-    height: 270px;
-	margin: 20px; /* Add some margin around the container */
-    border: 40px #F1F1F1; /* Add a border around the container */
-	border-style: outset;
-    border-radius: 20px;
+    width: 256px; /* animal picture sizes  */
+    height: 256px;
+	opacity: 0.9;
 }
 
 /* Hyperlinks */
@@ -75,7 +72,7 @@ a:hover {
 
 /* Define styles for the container */
 .image-container {
-    width: 256x; /* Adjust the width of the container */
+    width: 256px; /* Adjust the width of the container */
     height: 256px; /* Adjust the height of the container */
     position: relative; /* Position the parts relative to the container */
     border: 10px solid black; /* Add a border for visual clarity */
@@ -89,8 +86,8 @@ height: 25%; /* Each part occupies 25% of the container's height */
 float: left; /* Float the parts to arrange them horizontally */
 background-repeat: no-repeat; /* Prevent background from repeating */
 background-size: 400% 400%;
-background-image: url('MMM_IMAGES/AnimalsBW/Chicken_BW_up.png');
-opacity:0.4;
+background-image: url('../MMM_IMAGES/AnimalsC/Chicken_C_up.png');
+opacity: 0.1;
 }
 
 

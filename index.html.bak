@@ -47,34 +47,35 @@
         <button id="start-button">Start</button>
 	</div>
 	
-    <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
-    
-	<div id="game-container">
+        <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
+
+    <div id="game-container">
         <div id="game-board" class="game-field">
             <!-- Game nodes will be generated inside this div -->
         </div>
     </div>
-	
+
     <div id="secondary-game-container">
-		<div class="image-container">
-			<img src="MMM_IMAGES\AnimalsC\Chicken_C_up.png" style="position: absolute; width:200px; height:200px;">
-			<div class="part1" style="; background-position: 0% 0%;"></div>
-			<div class="part2" style="; background-position: 33% 0%;"></div>
-			<div class="part3" style="; background-position: 66% 0%;"></div>
-			<div class="part4" style="; background-position: 100% 0%;"></div>
-			<div class="part5" style="; background-position: 0% 33%;"></div>
-			<div class="part6" style="; background-position: 33% 33%;"></div>
-			<div class="part7" style="; background-position: 66% 33%;"></div>
-			<div class="part8" style="; background-position: 100% 33%;"></div>
-			<div class="part9" style="; background-position: 0% 66%;"></div>
-			<div class="part10" style="; background-position: 33% 66%;"></div>
-			<div class="part11" style="; background-position: 66% 66%;"></div>
-			<div class="part12" style="; background-position: 100% 66%;"></div>
-			<div class="part13" style="; background-position: 0% 100%;"></div>
-			<div class="part14" style=";opacity:0.4; background-position: 33% 100%;"></div>
-			<div class="part15" style="; background-position: 66% 100%;"></div>
-			<div class="part16" style="; background-position: 100% 100%;"></div>
-		</div>
+        <div class="image-container">
+		<img id="game-image" src="" style="position: absolute;">
+            <!-- Define each part with adjusted background positioning -->
+            <div class="part1" style="; background-position: 0% 0%;"></div>
+            <div class="part2" style="; background-position: 33% 0%;"></div>
+            <div class="part3" style="; background-position: 66% 0%;"></div>
+            <div class="part4" style="; background-position: 100% 0%;"></div>
+            <div class="part5" style="; background-position: 0% 33%;"></div>
+            <div class="part6" style="; background-position: 33% 33%;"></div>
+            <div class="part7" style="; background-position: 66% 33%;"></div>
+            <div class="part8" style="; background-position: 100% 33%;"></div>
+            <div class="part9" style="; background-position: 0% 66%;"></div>
+            <div class="part10" style="; background-position: 33% 66%;"></div>
+            <div class="part11" style="; background-position: 66% 66%;"></div>
+            <div class="part12" style="; background-position: 100% 66%;"></div>
+            <div class="part13" style="; background-position: 0% 100%;"></div>
+            <div class="part14" style="; background-position: 33% 100%;"></div>
+            <div class="part15" style="; background-position: 66% 100%;"></div>
+            <div class="part16" style="; background-position: 100% 100%;"></div>
+        </div>
         <p>
             <form id="guess-form">
                 <label for="guessName">Guess:</label>

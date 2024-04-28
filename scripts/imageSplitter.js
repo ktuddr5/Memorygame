@@ -2,18 +2,18 @@
 var imagePaths = [
     'MMM_IMAGES/AnimalsC/Chicken_C_up.png',
     'MMM_IMAGES/AnimalsC/Panda_C_up.png',
-    'MMM_IMAGES/AnimalsC/Pig_C_up.png'
-    'MMM_IMAGES/AnimalsC/Squirrel_C_up.png'
-    'MMM_IMAGES/AnimalsC/Woodpecker_C_up.png'
-    'MMM_IMAGES/FoodC/Broccoli_C_up.png'
-    'MMM_IMAGES/FoodC/Donut_C_up.png'
-    'MMM_IMAGES/FoodC/Kiwi_C_up.png'
-    'MMM_IMAGES/FoodC/Pear_C_up.png'
-    'MMM_IMAGES/FoodC/Pizza_C_up.png'
-    'MMM_IMAGES/ObjectsC/Magnet_C_up.png'
-    'MMM_IMAGES/ObjectsC/Pencil_C_up.png'
-    'MMM_IMAGES/ObjectsC/Ping_Pong_C_up.png'
-    'MMM_IMAGES/ObjectsC/Screwdriver_C_up.png'
+    'MMM_IMAGES/AnimalsC/Pig_C_up.png',
+    'MMM_IMAGES/AnimalsC/Squirrel_C_up.png',
+    'MMM_IMAGES/AnimalsC/Woodpecker_C_up.png',
+    'MMM_IMAGES/FoodC/Broccoli_C_up.png',
+    'MMM_IMAGES/FoodC/Donut_C_up.png',
+    'MMM_IMAGES/FoodC/Kiwi_C_up.png',
+    'MMM_IMAGES/FoodC/Pear_C_up.png',
+    'MMM_IMAGES/FoodC/Pizza_C_up.png',
+    'MMM_IMAGES/ObjectsC/Magnet_C_up.png',
+    'MMM_IMAGES/ObjectsC/Pencil_C_up.png',
+    'MMM_IMAGES/ObjectsC/Ping_Pong_C_up.png',
+    'MMM_IMAGES/ObjectsC/Screwdriver_C_up.png',
     'MMM_IMAGES/ObjectsC/Skull_C_up.png'
 ];
 
@@ -147,18 +147,18 @@ function getPixelArraysFor16x16Images(imagePaths16, callback) {
 var imagePaths16 = [
     'MMM_IMAGES/AnimalsC/Chicken_C.png',
     'MMM_IMAGES/AnimalsC/Panda_C.png',
-    'MMM_IMAGES/AnimalsC/Pig_C.png'
-    'MMM_IMAGES/AnimalsC/Squirrel_C.png'
-    'MMM_IMAGES/AnimalsC/Woodpecker_C.png'
-    'MMM_IMAGES/FoodC/Broccoli_C.png'
-    'MMM_IMAGES/FoodC/Donut_C.png'
-    'MMM_IMAGES/FoodC/Kiwi_C.png'
-    'MMM_IMAGES/FoodC/Pear_C.png'
-    'MMM_IMAGES/FoodC/Pizza_C.png'
-    'MMM_IMAGES/ObjectsC/Magnet_C.png'
-    'MMM_IMAGES/ObjectsC/Pencil_C.png'
-    'MMM_IMAGES/ObjectsC/Ping_Pong_C.png'
-    'MMM_IMAGES/ObjectsC/Screwdriver_C.png'
+    'MMM_IMAGES/AnimalsC/Pig_C.png',
+    'MMM_IMAGES/AnimalsC/Squirrel_C.png',
+    'MMM_IMAGES/AnimalsC/Woodpecker_C.png',
+    'MMM_IMAGES/FoodC/Broccoli_C.png',
+    'MMM_IMAGES/FoodC/Donut_C.png',
+    'MMM_IMAGES/FoodC/Kiwi_C.png',
+    'MMM_IMAGES/FoodC/Pear_C.png',
+    'MMM_IMAGES/FoodC/Pizza_C.png',
+    'MMM_IMAGES/ObjectsC/Magnet_C.png',
+    'MMM_IMAGES/ObjectsC/Pencil_C.png',
+    'MMM_IMAGES/ObjectsC/Ping_Pong_C.png',
+    'MMM_IMAGES/ObjectsC/Screwdriver_C.png',
     'MMM_IMAGES/ObjectsC/Skull_C.png'
 ];
 

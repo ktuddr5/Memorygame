@@ -11,6 +11,41 @@ let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
 
+// BW image array
+var imagePaths = [
+    '..\MMM_IMAGES\AnimalsBW\Chicken_BW_up.png',
+    'MMM_IMAGES\AnimalsBW\Panda_BW_up.png',
+    'MMM_IMAGES\AnimalsBW\ig_BW_up.png',
+    'MMM_IMAGES\AnimalsBW\Squirrel_BW_up.png',
+    'MMM_IMAGES\AnimalsBW\Woodpecker_BW_up.png',
+    'MMM_IMAGES\FoodBW\Broccoli_BW_up.png',
+    'MMM_IMAGES\FoodBW\Donut_BW_up.png',
+    'MMM_IMAGES\FoodBW\Kiwi_BW_up.png',
+    'MMM_IMAGES\FoodBW\Pear_BW_up.png',
+    'MMM_IMAGES\FoodBW\Pizza_BW_up.png',
+    'MMM_IMAGES\ObjectsBW\Magnet_BW_up.png',
+    'MMM_IMAGES\ObjectsBW\Pencil_BW_up.png',
+    'MMM_IMAGES\ObjectsBW\Ping_Pong_BW_up.png',
+    'MMM_IMAGES\ObjectsBW\Screwdriver_BW_up.png',
+    'MMM_IMAGES\ObjectsBW\Skull_BW_up.png'
+];
+
+// Get the image element by its ID
+var imageElement = document.getElementById('game-image');
+
+// Generate a random number between 1 and 16
+//var randomNumber = Math.floor(Math.random() * 16) + 1;
+
+// Use the random number to select an image path from the imagePaths array
+//var imagePath = imagePaths[randomNumber - 1]; // Subtract 1 to adjust for array indexing
+
+// Set the src attribute of the image to the selected image path
+imageElement.src = imagePath[0];
+
+
+
+
+
 // Given image
 let image = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -257,7 +292,7 @@ function adjustOpacityForCurrentPart(sections) {
         var section = sections.find(sec => sec.part === currentPart);
         if (section) {
             // If the section is found, set the opacity of the corresponding div
-            currentDiv.style.opacity = 0.1;
+            currentDiv.style.opacity = 0.4;
         }
     }
 }

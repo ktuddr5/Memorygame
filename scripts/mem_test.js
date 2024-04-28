@@ -11,6 +11,11 @@ let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
 
+
+
+
+
+
 // Given image
 let image = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
