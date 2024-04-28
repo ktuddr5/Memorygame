@@ -1,45 +1,41 @@
 // Define an array of image paths
 var imagePaths = [
-    'MMM_IMAGES/AnimalsBW/Chicken_BW_up.png',
-    'MMM_IMAGES/AnimalsBW/Panda_BW_up.png',
-    'MMM_IMAGES/AnimalsBW/Pig_BW_up.png'
-    'MMM_IMAGES/AnimalsBW/Squirrel_BW_up.png'
-    'MMM_IMAGES/AnimalsBW/Woodpecker_BW_up.png'
-    'MMM_IMAGES/FoodBW/Broccoli_BW_up.png'
-    'MMM_IMAGES/FoodBW/Donut_BW_up.png'
-    'MMM_IMAGES/FoodBW/Kiwi_BW_up.png'
-    'MMM_IMAGES/FoodBW/Pear_BW_up.png'
-    'MMM_IMAGES/FoodBW/Pizza_BW_up.png'
-    'MMM_IMAGES/ObjectsBW/Magnet_BW_up.png'
-    'MMM_IMAGES/ObjectsBW/Pencil_BW_up.png'
-    'MMM_IMAGES/ObjectsBW/Ping_Pong_BW_up.png'
-    'MMM_IMAGES/ObjectsBW/Screwdriver_BW_up.png'
-    'MMM_IMAGES/ObjectsBW/Skull_BW_up.png'
+    'MMM_IMAGES/AnimalsC/Chicken_C_up.png',
+    'MMM_IMAGES/AnimalsC/Panda_C_up.png',
+    'MMM_IMAGES/AnimalsC/Pig_C_up.png'
+    'MMM_IMAGES/AnimalsC/Squirrel_C_up.png'
+    'MMM_IMAGES/AnimalsC/Woodpecker_C_up.png'
+    'MMM_IMAGES/FoodC/Broccoli_C_up.png'
+    'MMM_IMAGES/FoodC/Donut_C_up.png'
+    'MMM_IMAGES/FoodC/Kiwi_C_up.png'
+    'MMM_IMAGES/FoodC/Pear_C_up.png'
+    'MMM_IMAGES/FoodC/Pizza_C_up.png'
+    'MMM_IMAGES/ObjectsC/Magnet_C_up.png'
+    'MMM_IMAGES/ObjectsC/Pencil_C_up.png'
+    'MMM_IMAGES/ObjectsC/Ping_Pong_C_up.png'
+    'MMM_IMAGES/ObjectsC/Screwdriver_C_up.png'
+    'MMM_IMAGES/ObjectsC/Skull_C_up.png'
 ];
 
 // Load and split each image
 imagePaths.forEach(function(path, index) {
     var image = new Image();
     image.src = path;
-
+	
     image.onload = function() {
         // Determine the dimensions of the image
         var imageWidth = image.width;
         var imageHeight = image.height;
-
         // Define the number of rows and columns for splitting the image
         var numRows = 4;
         var numCols = 4;
-
         // Calculate the dimensions of each part
         var partWidth = imageWidth / numCols;
         var partHeight = imageHeight / numRows;
-
         // Create HTML elements for each part and display them
         var imagePartsContainer = document.createElement('div');
         imagePartsContainer.id = 'imageParts_' + index;
         document.body.appendChild(imagePartsContainer);
-
         for (var row = 0; row < numRows; row++) {
             for (var col = 0; col < numCols; col++) {
                 var canvas = document.createElement('canvas');
@@ -55,6 +51,37 @@ imagePaths.forEach(function(path, index) {
             }
         }
     };
+	image.onload = function() {
+    // Determine the dimensions of the image
+    var imageWidth = image.width;
+    var imageHeight = image.height;
+    // Define the number of rows and columns for splitting the image
+    var numRows = 4;
+    var numCols = 4;
+    // Calculate the dimensions of each part
+    var partWidth = imageWidth / numCols;
+    var partHeight = imageHeight / numRows;
+    // Get the container element
+    var container = document.getElementById('imagePartsContainer');
+    // Loop through each row and column to generate image parts
+    for (var row = 0; row < numRows; row++) {
+        for (var col = 0; col < numCols; col++) {
+            // Create a new canvas element for each part
+            var canvas = document.createElement('canvas');
+            canvas.width = partWidth;
+            canvas.height = partHeight;
+            var context = canvas.getContext('2d');
+            // Draw the corresponding part of the image onto the canvas
+            context.drawImage(image, col * partWidth, row * partHeight, partWidth, partHeight, 0, 0, partWidth, partHeight);
+            // Create an img element to display the part
+            var img = document.createElement('img');
+            img.src = canvas.toDataURL();
+            img.alt = 'Part ' + (row * numCols + col + 1);
+            // Append the img element to the container
+            container.appendChild(img);
+        }
+    }
+};
 });
 
 
@@ -118,24 +145,26 @@ function getPixelArraysFor16x16Images(imagePaths16, callback) {
 
 // Example usage:
 var imagePaths16 = [
-    'MMM_IMAGES/AnimalsBW/Chicken_BW.png',
-    'MMM_IMAGES/AnimalsBW/Panda_BW.png',
-    'MMM_IMAGES/AnimalsBW/Pig_BW.png'
-    'MMM_IMAGES/AnimalsBW/Squirrel_BW.png'
-    'MMM_IMAGES/AnimalsBW/Woodpecker_BW.png'
-    'MMM_IMAGES/FoodBW/Broccoli_BW.png'
-    'MMM_IMAGES/FoodBW/Donut_BW.png'
-    'MMM_IMAGES/FoodBW/Kiwi_BW.png'
-    'MMM_IMAGES/FoodBW/Pear_BW.png'
-    'MMM_IMAGES/FoodBW/Pizza_BW.png'
-    'MMM_IMAGES/ObjectsBW/Magnet_BW.png'
-    'MMM_IMAGES/ObjectsBW/Pencil_BW.png'
-    'MMM_IMAGES/ObjectsBW/Ping_Pong_BW.png'
-    'MMM_IMAGES/ObjectsBW/Screwdriver_BW.png'
-    'MMM_IMAGES/ObjectsBW/Skull_BW.png'
+    'MMM_IMAGES/AnimalsC/Chicken_C.png',
+    'MMM_IMAGES/AnimalsC/Panda_C.png',
+    'MMM_IMAGES/AnimalsC/Pig_C.png'
+    'MMM_IMAGES/AnimalsC/Squirrel_C.png'
+    'MMM_IMAGES/AnimalsC/Woodpecker_C.png'
+    'MMM_IMAGES/FoodC/Broccoli_C.png'
+    'MMM_IMAGES/FoodC/Donut_C.png'
+    'MMM_IMAGES/FoodC/Kiwi_C.png'
+    'MMM_IMAGES/FoodC/Pear_C.png'
+    'MMM_IMAGES/FoodC/Pizza_C.png'
+    'MMM_IMAGES/ObjectsC/Magnet_C.png'
+    'MMM_IMAGES/ObjectsC/Pencil_C.png'
+    'MMM_IMAGES/ObjectsC/Ping_Pong_C.png'
+    'MMM_IMAGES/ObjectsC/Screwdriver_C.png'
+    'MMM_IMAGES/ObjectsC/Skull_C.png'
 ];
 
 getPixelArraysFor16x16Images(imagePaths16, function(pixelArrays) {
     console.log(pixelArrays); // Output the array of pixel arrays to the console
     // You can do further processing with the array of pixel arrays here...
 });
+
+
