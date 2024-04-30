@@ -127,12 +127,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update the background images in the CSS file
 const parts = document.querySelectorAll('.part1, .part2, .part3, .part4, .part5, .part6, .part7, .part8, .part9, .part10, .part11, .part12, .part13, .part14, .part15, .part16');
-//parts.forEach((part, index) => {
-//    part.style.backgroundImage = `url('../MMM_IMAGES/${theme}/' + '${images[index + rndInt + 5]}')`;
-//});
 parts.forEach((part, index) => {
-    part.style.backgroundImage = `url('../MMM_IMAGES/${theme}/${images[index + rndInt + 5]}')`;
+    const imageUrl = images[rndInt + 5]; // Get the URL for the current image
+    if (imageUrl) { // Check if the URL is defined
+        part.style.backgroundImage = `url('MMM_IMAGES/${theme}/${imageUrl}')`; // Set the background image
+    } else {
+        console.error('Image URL is undefined for index:', index);
+    }
 });
+///parts.forEach((part, index) => {
+///    part.style.backgroundImage = `url('../MMM_IMAGES/${theme}/${images[index + rndInt + 5]}')`;
+//});
     };
 
     // Retrieve the selected theme from the query parameter
