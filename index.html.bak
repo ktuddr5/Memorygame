@@ -9,10 +9,9 @@
     <link href="styles/styles.css" rel="stylesheet"/>
     <link href="styles/layout.css" rel="stylesheet"/>
 
-	<script src="scripts/imageSplitter.js"></script>
+    <script src="scripts/imageSplitter.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="scripts/hide_section.js"></script>
-    <script src="scripts/mem_test.js"></script>
 	
 
 
@@ -45,11 +44,11 @@
     </section>
     <button id="hide-description-button" class="hide-button">Hide Description</button><br/>
     <hr/>
-	<div id="start-button-container" class="section-txt">
+    <div id="start-button-container" class="section-txt">
         <button id="start-button">Start</button>
-	</div>
+    </div>
 	
-        <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
+    <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
 
     <div id="game-container">
         <div id="game-board" class="game-field">
@@ -59,8 +58,7 @@
 
     <div id="secondary-game-container">
         <div class="image-container">
-		
-            <img src="MMM_IMAGES\AnimalsBW\Chicken_BW_up.png" style="position: absolute;">
+            <img id="themeImage" style="position: absolute;">
             <!-- Define each part with adjusted background positioning -->
             <div class="part1" style="; background-position: 0% 0%;"></div>
             <div class="part2" style="; background-position: 33% 0%;"></div>
@@ -80,16 +78,12 @@
             <div class="part16" style="; background-position: 100% 100%;"></div>
         </div>
         <p>
-
-            <span id="themeText">Animal</span>
-            <br/>
-            <img id="themeImage" src="" alt="Theme Image">
-            <br/>
+            <span id="themeText"></span>
             <form id="guess-form">
                 <label for="guessName">Guess:</label>
                 <input type="text" id="guessName" name="guessName">
                 <input type="submit" value="Submit"><br>
-                <span id="guess-result"></span> <!-- Add this span for displaying guess result -->
+                <span id="guess-result"></span>
             </form>
         </p>
     </div>
@@ -97,27 +91,32 @@
 
 <!-- Theme image script -->
 <script>
+
 document.addEventListener('DOMContentLoaded', () => {
     // Function to load the image and update text for the selected theme
     const loadThemeImage = (theme) => {
         // Define image filenames for each theme
         const themeImages = {
-            'AnimalsBW': ['Pig_BW_up.png', 'Another_Animal_Image.png'],
-            'FoodBW': ['Donut_BW_up.png', 'Another_Food_Image.png'],
-            'ObjectsBW': ['Skull_BW_up.png', 'Another_Object_Image.png'],
+            'AnimalsBW': ['Chicken_BW_up.png', 'Panda_BW_up.png', 'Pig_BW_up.png', 'Squirrel_BW_up.png', 'Woodpecker_BW_up.png',
+			'Chicken_C_up.png', 'Panda_C_up.png', 'Pig_C_up.png', 'Squirrel_C_up.png', 'Woodpecker_C_up.png'],
+            'FoodBW': ['Broccoli_BW_up.png', 'Donut_BW_up.png', 'Kiwi_BW_up.png', 'Pear_BW_up.png', 'Pizza_BW_up.png',
+			'Broccoli_C_up.png', 'Donut_C_up.png', 'Kiwi_C_up.png', 'Pear_C_up.png', 'Pizza_C_up.png'],
+            'ObjectsBW': ['Magnet_BW_up.png', 'Pencil_BW_up.png', 'Ping_Pong_BW_up.png', 'Screwdriver_BW_up.png', 'Skull_BW_up.png',
+			'Magnet_C_up.png', 'Pencil_C_up.png', 'Ping_Pong_C_up.png', 'Screwdriver_C_up.png', 'Skull_C_up.png'],
         };
 
         // Get the image filenames for the selected theme
         const images = themeImages[theme];
+		
         if (!images || images.length === 0) {
             console.error('No images found for the selected theme:', theme);
             return;
         }
 
-        // Set the image source to the first image in the list
+        // Set the image source to a random one in the list
+        const rndInt = randomIntFromInterval(0, 4); // 0-4 are BW , 5-9 are C
         const directoryPath = `MMM_IMAGES/${theme}/`; // Define the directory path
-        document.getElementById('themeImage').src = directoryPath + images[0];
-
+        document.getElementById('themeImage').src = directoryPath + images[rndInt];
         // Update the text based on the selected theme
         const themeText = {
             'AnimalsBW': 'Animal',
@@ -125,6 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
             'ObjectsBW': 'Object',
         };
         document.getElementById('themeText').textContent = themeText[theme];
+
+        // Update the background images in the CSS file
+const parts = document.querySelectorAll('.part1, .part2, .part3, .part4, .part5, .part6, .part7, .part8, .part9, .part10, .part11, .part12, .part13, .part14, .part15, .part16');
+parts.forEach((part, index) => {
+    part.style.backgroundImage = `url('../MMM_IMAGES/${theme}/' + '${images[index + rndInt + 5]}')`;
+});
+parts.forEach((part, index) => {
+    part.style.backgroundImage = `url('../MMM_IMAGES/${theme}/${images[index + rndInt + 5]}')`;
+});
     };
 
     // Retrieve the selected theme from the query parameter
@@ -135,11 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loadThemeImage(selectedTheme);
     }
 });
-</script>
 
-<script>
     // JavaScript code to toggle dark mode and store the preference
-	const toggleDarkMode = () => {
+    const toggleDarkMode = () => {
         document.body.classList.toggle('dark-mode');
         const darkModeEnabled = document.body.classList.contains("dark-mode");
         localStorage.setItem("darkModeEnabled", darkModeEnabled);
@@ -230,13 +236,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('guessName').value = "";
     });
-	
-	// Coloured image stuff
+
+    	// Coloured image stuff
 	    // Define the array of image paths
-    var imagePaths = [
+        var imagePaths = [
         'MMM_IMAGES\AnimalsBW\Chicken_BW_up.png',
         'MMM_IMAGES\AnimalsBW\Panda_BW_up.png',
-        'MMM_IMAGES\AnimalsBW\ig_BW_up.png',
+        'MMM_IMAGES\AnimalsBW\Pig_BW_up.png',
         'MMM_IMAGES\AnimalsBW\Squirrel_BW_up.png',
         'MMM_IMAGES\AnimalsBW\Woodpecker_BW_up.png',
         'MMM_IMAGES\FoodBW\Broccoli_BW_up.png',
@@ -250,24 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'MMM_IMAGES\ObjectsBW\Screwdriver_BW_up.png',
         'MMM_IMAGES\ObjectsBW\Skull_BW_up.png'
     ];
-
-    // Choose the index of the image you want to test (0-based index)
-    var testImageIndex = 0; // Change this to select a different image
-
-    // Load the selected image
-    var testImage = new Image();
-    testImage.src = imagePaths[testImageIndex];
-
-    // Append the test image to the document body for display
-    document.getElementById('testImageContainer').appendChild(testImage);
-	
-	
-	
-	
-</script>
-	
-
-
+	function randomIntFromInterval(min, max) { // min and max included 
+		return Math.floor(Math.random() * (max - min + 1) + min);
+	}
     // Retrieve script option from query parameter
     const urlParams = new URLSearchParams(window.location.search);
     const scriptOption = urlParams.get('script');
