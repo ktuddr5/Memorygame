@@ -380,7 +380,7 @@ const setImageBasedOnIndex = (imageIndex) => {
     return image;
 };
 const imageIndex = getImageIndex(thematic, rndInt);
-const image = setImageBasedOnIndex(getImageIndex(theme, rndInt));
+const image = setImageBasedOnIndex(getImageIndex(thematic, rndInt));
 
 
 // Split the image into 4x4 sections

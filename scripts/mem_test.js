@@ -628,10 +628,11 @@ function findCurrentNumber() {
 
 	for(let i = 0; i < sections.length; i++)
 	{
-		if(sections[imagecoloring-1].part === unsorted[i].part)
-		{
-			return i+1;
-		}
+		if(imagecoloring != 0 )
+			if(sections[imagecoloring-1].part === unsorted[i].part)
+			{
+				return i+1;
+			}
 	}
 	return CurrentNumber;
 }
