@@ -87,11 +87,12 @@
             </form>
         </p>
     </div>
+	<div id="rndIntValue" style="display: none;">2</div>
 </main>
 
 <!-- Theme image script -->
 <script>
-
+const rndInt = randomIntFromInterval(0, 4); // 0-4 are BW , 5-9 are C
 document.addEventListener('DOMContentLoaded', () => {
     // Function to load the image and update text for the selected theme
     const loadThemeImage = (theme) => {
@@ -114,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Set the image source to a random one in the list
-        const rndInt = randomIntFromInterval(0, 4); // 0-4 are BW , 5-9 are C
         const directoryPath = `MMM_IMAGES/${theme}/`; // Define the directory path
         document.getElementById('themeImage').src = directoryPath + images[rndInt];
         // Update the text based on the selected theme
@@ -126,19 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('themeText').textContent = themeText[theme];
 
         // Update the background images in the CSS file
-const parts = document.querySelectorAll('.part1, .part2, .part3, .part4, .part5, .part6, .part7, .part8, .part9, .part10, .part11, .part12, .part13, .part14, .part15, .part16');
-parts.forEach((part, index) => {
-    const imageUrl = images[rndInt + 5]; // Get the URL for the current image
-    if (imageUrl) { // Check if the URL is defined
-        part.style.backgroundImage = `url('MMM_IMAGES/${theme}/${imageUrl}')`; // Set the background image
-    } else {
-        console.error('Image URL is undefined for index:', index);
-    }
-});
-///parts.forEach((part, index) => {
-///    part.style.backgroundImage = `url('../MMM_IMAGES/${theme}/${images[index + rndInt + 5]}')`;
-//});
-    };
+	const parts = document.querySelectorAll('.part1, .part2, .part3, .part4, .part5, .part6, .part7, .part8, .part9, .part10, .part11, .part12, .part13, .part14, .part15, .part16');
+	parts.forEach((part, index) => {
+		const imageUrl = images[rndInt + 5]; // Get the URL for the current image
+		if (imageUrl) { // Check if the URL is defined
+			part.style.backgroundImage = `url('MMM_IMAGES/${theme}/${imageUrl}')`; // Set the background image
+		} else {
+			console.error('Image URL is undefined for index:', index);
+		}
+	});
+};
 
     // Retrieve the selected theme from the query parameter
     const selectedTheme = new URLSearchParams(window.location.search).get('theme');
@@ -148,7 +145,7 @@ parts.forEach((part, index) => {
         loadThemeImage(selectedTheme);
     }
 });
-
+const thematic = new URLSearchParams(window.location.search).get('theme');
     // JavaScript code to toggle dark mode and store the preference
     const toggleDarkMode = () => {
         document.body.classList.toggle('dark-mode');
