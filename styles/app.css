@@ -66,12 +66,10 @@ button:hover {
     background-color: #0056b3;
 }
 .background-image {
-    position: absolute;
-    width: 45%; /* Set the width of the image to 50% of its container */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Ensure the image covers the entire container */
-    top: 0;
-    left: 1;
+    position:absolute;
+    inset: 0;
+    margin: auto;
+    height: 80%;
     z-index: 0; /* Ensure the image appears below the title */
 }
 

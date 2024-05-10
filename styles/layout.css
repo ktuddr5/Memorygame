@@ -23,6 +23,10 @@
     align-items: center; /* Center vertically */
 }
 
+#guess-form {
+    font-family: 'Barlow', Arial, sans-serif;
+}
+
 .node {
     height: 60px;
     width: 60px;
@@ -97,6 +101,3 @@
 .dark-mode #game-board > .node {
     border-color: #1D1D1D; /* Adjust border color */
 }
-
-
-
