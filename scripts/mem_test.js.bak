@@ -7,6 +7,8 @@ for (let i = 1; i <= numNodes; i++) {
 let nodeOrder = [];
 let currentOrder = 0;
 let level = 2;
+let multiplier = 1;
+let scoreM = 0;
 let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
@@ -421,7 +423,8 @@ $(document).ready(function() {
     */
     $('#game-board').on("click", ".node", function() {
         if (gameOver) return; // Ignore clicks when the game is over
-
+		// on click always give 1 point
+		scoreM = scoreM + multiplier;
         let id = $(this).attr("id");
         let node = document.getElementById(id);
 
@@ -429,6 +432,12 @@ $(document).ready(function() {
             endGame(level);
             startButton.show();
             gameOver = true;
+			
+			// on wrong node click deduct 1 point`
+			scoreM = scoreM - multiplier;
+			// on wrong node click set multiplier to 1
+			multiplier = 1;
+			// add score calc here for when lost section
             return;
         }
 
@@ -443,8 +452,12 @@ $(document).ready(function() {
             if (level > numNodes) {
                 endGame(level);
                 startButton.show();
+				
+				// add score calc here for when all sections done
                 return;
             }
+			multiplier++;
+			// add score calc here for when cleared section
             playLevel(defaultBoard.slice());
         }
     });
@@ -545,14 +558,14 @@ function emptyBoard(board) {
 function endGame(score) {
     let gameBoard = document.getElementById("game-board");
     let gameMessage = document.getElementById("game-message");
-
+	
     gameBoard.innerHTML = "";
-    if (score > 25) {
+    if (score > 999) {
         gameMessage.innerHTML =
             "<h2> You have reached the maximum score of " + (score - 1).toString() + "</h2>";
     } else {
         gameMessage.innerHTML =
-            "<h2> Your current score is " + (score - 1).toString() + ". Continue? </h2>";
+            "<h2> Wrong! Multiplier lowered set to 1, score is " + (scoreM).toString() + ". Continue? </h2>";
     }
 }
 
@@ -628,10 +641,11 @@ function findCurrentNumber() {
 
 	for(let i = 0; i < sections.length; i++)
 	{
-		if(sections[imagecoloring-1].part === unsorted[i].part)
-		{
-			return i+1;
-		}
+		if(imagecoloring != 0 )
+			if(sections[imagecoloring-1].part === unsorted[i].part)
+			{
+				return i+1;
+			}
 	}
 	return CurrentNumber;
 }

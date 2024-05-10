@@ -7,6 +7,8 @@ for (let i = 1; i <= numNodes; i++) {
 let nodeOrder = [];
 let currentOrder = 0;
 let level = 2;
+let multiplier = 1;
+let scoreM = 0;
 let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
@@ -421,14 +423,27 @@ $(document).ready(function() {
     */
     $('#game-board').on("click", ".node", function() {
         if (gameOver) return; // Ignore clicks when the game is over
-
+		// on click always give 1 point
+		
+		scoreM = scoreM + multiplier;
         let id = $(this).attr("id");
         let node = document.getElementById(id);
 
         if (node.classList.contains("node-f")) {
+			// on wrong node click deduct 1 point`
+			scoreM = scoreM - multiplier;
+			// on wrong node click set multiplier to 1
+			multiplier = 1;
+			// add score calc here for when lost section
+			
             endGame(level);
             startButton.show();
             gameOver = true;
+			
+
+			
+			
+			
             return;
         }
 
@@ -437,12 +452,16 @@ $(document).ready(function() {
 
         // Check if all nodes have been clicked
         if ($('.node-t').length === 0) {
-            level++;
+            multiplier++;
+			// add score calc here for when cleared section
+			level++;
             firstNodeClicked = false;
             // End game if max score beat
             if (level > numNodes) {
                 endGame(level);
                 startButton.show();
+				
+				// add score calc here for when all sections done
                 return;
             }
             playLevel(defaultBoard.slice());
@@ -545,14 +564,14 @@ function emptyBoard(board) {
 function endGame(score) {
     let gameBoard = document.getElementById("game-board");
     let gameMessage = document.getElementById("game-message");
-
+	
     gameBoard.innerHTML = "";
-    if (score > 25) {
+    if (score > 999) {
         gameMessage.innerHTML =
             "<h2> You have reached the maximum score of " + (score - 1).toString() + "</h2>";
     } else {
         gameMessage.innerHTML =
-            "<h2> Your current score is " + (score - 1).toString() + ". Continue? </h2>";
+            "<h2> Wrong! Multiplier lowered set to 1, score is " + (scoreM).toString() + ". Continue? </h2>";
     }
 }
 

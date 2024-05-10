@@ -19,6 +19,10 @@ h1 {
 h2 {
     font-size: 1.75rem;
 }
+h5{
+	font-size: 2rem;
+	align: center;
+}
 
 /* Body */
 body {
@@ -31,10 +35,11 @@ p {
     font-size: 1.5rem;
 }
 
+
 img {
     width: 256px; /* animal picture sizes  */
     height: 256px;
-	opacity: 0.9;
+	opacity: 1;
 }
 
 /* Hyperlinks */
