@@ -9,7 +9,9 @@ let currentOrder = 0;
 let level = 2;
 let gameOver = false;
 let firstNodeClicked = false;
+var video = document.getElementById("videoPlayer");
 
+video.play();
 $(document).ready(function() {
     let startButton = $("#start-button");
     let startButtonContainer = $("#start-button-container");
@@ -36,6 +38,7 @@ $(document).ready(function() {
         }
         /* Clicking final node in level with no errors */
         else if(nodeNum === nodeOrder[nodeOrder.length - 1]) {
+            video.play();
             level = level + 1;
             firstNodeClicked = false;
             // End game if max score beat

@@ -11,6 +11,7 @@ let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
 let imagecoloring = 0;
+var video = document.getElementById("videoPlayer");
 
 // chicken
 let image1 = [
@@ -437,6 +438,7 @@ $(document).ready(function() {
 
         // Check if all nodes have been clicked
         if ($('.node-t').length === 0) {
+            video.play();
             level++;
             firstNodeClicked = false;
             // End game if max score beat
