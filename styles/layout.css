@@ -21,10 +21,13 @@
 
 #videoPlayer{
     position:absolute;
+    pointer-events: none;
+    inset: 0;
+    margin: auto;
     height: 100%;
     width: 100%;
-    pointer-events: none;
 }
+
 
 #secondary-game-container {
     float: right;
