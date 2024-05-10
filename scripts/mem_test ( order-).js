@@ -11,8 +11,6 @@ let gameOver = false;
 let firstNodeClicked = false;
 var video = document.getElementById("videoPlayer");
 
-video.play();
-
 $(document).ready(function() {
     let startButton = $("#start-button");
     let startButtonContainer = $("#start-button-container");
