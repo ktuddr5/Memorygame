@@ -116,12 +116,13 @@ opacity: 0.1;
 #start-button-container {
     text-align: center;
 }
-
-#score-container,
-#multiplier-container {
-    display: inline-block; /* Display elements side by side */
-    vertical-align: middle; /* Align elements vertically in the middle */
+#score-container {
+    text-align: center;
 }
+#mult-container{
+	text-align: center
+}
+
 
 #score-number {
     transform-style: preserve-3d;

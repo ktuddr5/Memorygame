@@ -54,9 +54,19 @@
         <div id="game-board" class="game-field">
             <!-- Game nodes will be generated inside this div -->
         </div>
-		<div id="score-container">
-			<h5>Score: <span id="score-number">0</span></h5>
+		
+		<div class="section-txt">
+			<span>Score </span>
+			<div id="score-container" class="inline-block">
+				<span id="score-number">0</span>
+			</div>
+			<p></p>
+			<span>Multiplier </span>
+			<div id="mult-container" class="inline-block">
+				<span id="multiplier-number">1</span>
+			</div>
 		</div>
+		
     </div>
 
     <div id="secondary-game-container">

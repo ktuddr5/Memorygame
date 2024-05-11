@@ -119,11 +119,15 @@ opacity: 0.1;
 #score-container {
     text-align: center;
 }
-
-#score-container h5 {
-    display: inline;
+#mult-container{
+	text-align: center
 }
-
+#mult-number {
+    transform-style: preserve-3d;
+    font-size: 15px;
+    line-height: 15px;
+	display: inline;
+}
 #score-number {
     transform-style: preserve-3d;
     font-size: 15px;

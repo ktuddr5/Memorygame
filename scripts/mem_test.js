@@ -401,16 +401,21 @@ function splitGameField() {
 $(document).ready(function() {
     let startButton = $("#start-button");
 	let scoreCounter = $("#score-container");
+	let multiplierCounter = $("#mult-container");
+
     let startButtonContainer = $("#start-button-container");
 	scoreCounter.hide();
+	multiplierCounter.hide();
 	function updateScoreDisplay() {
-        scoreCounter.text(scoreM);
-    }
+    scoreCounter.text("Points " + scoreM);
+	multiplierCounter.text("Mult " +multiplier);
+	}
 	
     // Hide "Start" button when pressed
     startButtonContainer.on("click", "#start-button", function() {
         startButton.hide();
 		scoreCounter.show();
+		multiplierCounter.show();
         startGame();
     });
 	
@@ -444,6 +449,7 @@ $(document).ready(function() {
             endGame(level);
             startButton.show();
 			scoreCounter.hide();
+			multiplierCounter.hide();
             gameOver = true;
 
             return;
@@ -463,6 +469,7 @@ $(document).ready(function() {
                 endGame(level);
                 startButton.show();
 				scoreCounter.hide();
+				multiplierCounter.hide();
 				// add score calc here for when all sections done
                 return;
             }
