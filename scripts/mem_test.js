@@ -7,11 +7,26 @@ for (let i = 1; i <= numNodes; i++) {
 let nodeOrder = [];
 let currentOrder = 0;
 let level = 2;
+let multiplier = 1;
+let scoreM = 0;
 let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
 let imagecoloring = 0;
+
+// score/points display
+let levelnumber = 0;
+let scoreCounter = $("#score-container");
+let multiplierCounter = $("#mult-container");
+let levelCounter = $("#lvl-container");
+function updateScoreDisplay() {
+	scoreCounter.text("Points " + scoreM);
+	multiplierCounter.text("Mult " +multiplier);
+	levelCounter.text("Level " +levelnumber);
+}
+
 var video = document.getElementById("videoPlayer");
+
 
 // chicken
 let image1 = [
@@ -399,13 +414,18 @@ function splitGameField() {
 
 $(document).ready(function() {
     let startButton = $("#start-button");
+	
     let startButtonContainer = $("#start-button-container");
-	
-	
+	scoreCounter.hide();
+	multiplierCounter.hide();
+	levelCounter.hide();
 	
     // Hide "Start" button when pressed
     startButtonContainer.on("click", "#start-button", function() {
         startButton.hide();
+		scoreCounter.show();
+		multiplierCounter.show();
+		levelCounter.show();
         startGame();
     });
 	
@@ -422,14 +442,27 @@ $(document).ready(function() {
     */
     $('#game-board').on("click", ".node", function() {
         if (gameOver) return; // Ignore clicks when the game is over
-
+		// on click always give 1 point
+		
+		scoreM = scoreM + multiplier;
+		updateScoreDisplay();
         let id = $(this).attr("id");
         let node = document.getElementById(id);
 
         if (node.classList.contains("node-f")) {
+			// on wrong node click deduct 1 point`
+			scoreM = scoreM - multiplier;
+			// on wrong node click set multiplier to 1
+			multiplier = 1;
+			// score calc for when lost section
+			
             endGame(level);
             startButton.show();
+			scoreCounter.hide();
+			multiplierCounter.hide();
+			levelCounter.hide();
             gameOver = true;
+
             return;
         }
 
@@ -438,6 +471,8 @@ $(document).ready(function() {
 
         // Check if all nodes have been clicked
         if ($('.node-t').length === 0) {
+			// score calc for when cleared section
+            multiplier++;
             video.play();
             level++;
             firstNodeClicked = false;
@@ -445,6 +480,10 @@ $(document).ready(function() {
             if (level > numNodes) {
                 endGame(level);
                 startButton.show();
+				scoreCounter.hide();
+				multiplierCounter.hide();
+				levelCounter.hide();
+				// score calc for when all sections done
                 return;
             }
             playLevel(defaultBoard.slice());
@@ -458,11 +497,14 @@ $(document).ready(function() {
         emptyBoard(defaultBoard);
         playLevel(roll);
     }
+	updateScoreDisplay();
 });
 
 /* Main game loop */
 
 function playLevel(nodeNums) {
+	levelnumber++;
+	updateScoreDisplay();
     let rollCopy = nodeNums.slice();
     let nextNodeOrder = generateNextLevel(level, rollCopy);
     setTimeout(function() {     
@@ -547,14 +589,14 @@ function emptyBoard(board) {
 function endGame(score) {
     let gameBoard = document.getElementById("game-board");
     let gameMessage = document.getElementById("game-message");
-
+	
     gameBoard.innerHTML = "";
-    if (score > 25) {
+    if (score > 999) {
         gameMessage.innerHTML =
             "<h2> You have reached the maximum score of " + (score - 1).toString() + "</h2>";
     } else {
         gameMessage.innerHTML =
-            "<h2> Your current score is " + (score - 1).toString() + ". Continue? </h2>";
+            "<h2> Wrong! Multiplier lowered set to 1, score is " + (scoreM).toString() + ". Continue? </h2>";
     }
 }
 
@@ -638,3 +680,6 @@ function findCurrentNumber() {
 	}
 	return CurrentNumber;
 }
+
+
+  

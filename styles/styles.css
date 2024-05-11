@@ -19,6 +19,10 @@ h1 {
 h2 {
     font-size: 1.75rem;
 }
+h5{
+    font-size: 13pt;
+	
+}
 
 p {
     font-family: 'Barlow', Arial, sans-serif;
@@ -34,6 +38,7 @@ body {
 p {
     font-size: 1.5rem;
 }
+
 
 img {
     width: 256px; /* animal picture sizes  */
@@ -117,6 +122,31 @@ opacity: 0.1;
 #start-button-container {
     text-align: center;
 }
+#score-container {
+    text-align: center;
+}
+#mult-container{
+	text-align: center
+}
+#mult-number {
+    transform-style: preserve-3d;
+    font-size: 15px;
+    line-height: 15px;
+	display: inline;
+}
+#score-number {
+    transform-style: preserve-3d;
+    font-size: 15px;
+    line-height: 15px;
+	display: inline;
+}
+#level-number {
+	transform-style: preserve-3d;
+    font-size: 15px;
+    line-height: 15px;
+	display: inline;
+}
+
 
 #start-button {
     text-align: center;
