@@ -56,14 +56,15 @@
         </div>
 		
 		<div class="section-txt">
-			<span>Score </span>
 			<div id="score-container" class="inline-block">
 				<span id="score-number">0</span>
 			</div>
 			<p></p>
-			<span>Multiplier </span>
 			<div id="mult-container" class="inline-block">
 				<span id="multiplier-number">1</span>
+			</div>
+			<div id="score-container">
+				<span id="level-number">0</span>
 			</div>
 		</div>
 		

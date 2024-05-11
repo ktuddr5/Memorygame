@@ -122,8 +122,12 @@ opacity: 0.1;
 #mult-container{
 	text-align: center
 }
-
-
+#mult-number {
+    transform-style: preserve-3d;
+    font-size: 15px;
+    line-height: 15px;
+	display: inline;
+}
 #score-number {
     transform-style: preserve-3d;
     font-size: 15px;

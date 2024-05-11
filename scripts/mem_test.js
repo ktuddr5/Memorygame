@@ -13,7 +13,7 @@ let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
 let imagecoloring = 0;
-
+let levelnumber = 0;
 // chicken
 let image1 = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -402,13 +402,14 @@ $(document).ready(function() {
     let startButton = $("#start-button");
 	let scoreCounter = $("#score-container");
 	let multiplierCounter = $("#mult-container");
-
+	let levelCounter = $("#lvl-container");
     let startButtonContainer = $("#start-button-container");
 	scoreCounter.hide();
 	multiplierCounter.hide();
 	function updateScoreDisplay() {
     scoreCounter.text("Points " + scoreM);
 	multiplierCounter.text("Mult " +multiplier);
+	levelCounter.text("Level " +levelnumber);
 	}
 	
     // Hide "Start" button when pressed
@@ -416,6 +417,7 @@ $(document).ready(function() {
         startButton.hide();
 		scoreCounter.show();
 		multiplierCounter.show();
+		levelCounter.show();
         startGame();
     });
 	
@@ -444,12 +446,13 @@ $(document).ready(function() {
 			scoreM = scoreM - multiplier;
 			// on wrong node click set multiplier to 1
 			multiplier = 1;
-			// add score calc here for when lost section
+			// score calc for when lost section
 			
             endGame(level);
             startButton.show();
 			scoreCounter.hide();
 			multiplierCounter.hide();
+			levelCounter.hide();
             gameOver = true;
 
             return;
@@ -461,7 +464,7 @@ $(document).ready(function() {
         // Check if all nodes have been clicked
         if ($('.node-t').length === 0) {
             multiplier++;
-			// add score calc here for when cleared section
+			// score calc for when cleared section
 			level++;
             firstNodeClicked = false;
             // End game if max score beat
@@ -470,7 +473,8 @@ $(document).ready(function() {
                 startButton.show();
 				scoreCounter.hide();
 				multiplierCounter.hide();
-				// add score calc here for when all sections done
+				levelCounter.hide();
+				// score calc for when all sections done
                 return;
             }
             playLevel(defaultBoard.slice());
@@ -490,6 +494,7 @@ $(document).ready(function() {
 /* Main game loop */
 
 function playLevel(nodeNums) {
+	levelnumber++;
     let rollCopy = nodeNums.slice();
     let nextNodeOrder = generateNextLevel(level, rollCopy);
     setTimeout(function() {     
