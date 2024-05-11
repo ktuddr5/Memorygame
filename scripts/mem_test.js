@@ -14,6 +14,17 @@ let firstNodeClicked = false;
 let leveltemp = 0;
 let imagecoloring = 0;
 let levelnumber = 0;
+
+// score/points display
+let scoreCounter = $("#score-container");
+let multiplierCounter = $("#mult-container");
+let levelCounter = $("#lvl-container");
+function updateScoreDisplay() {
+	scoreCounter.text("Points " + scoreM);
+	multiplierCounter.text("Mult " +multiplier);
+	levelCounter.text("Level " +levelnumber);
+}
+
 // chicken
 let image1 = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -400,17 +411,11 @@ function splitGameField() {
 
 $(document).ready(function() {
     let startButton = $("#start-button");
-	let scoreCounter = $("#score-container");
-	let multiplierCounter = $("#mult-container");
-	let levelCounter = $("#lvl-container");
+	
     let startButtonContainer = $("#start-button-container");
 	scoreCounter.hide();
 	multiplierCounter.hide();
-	function updateScoreDisplay() {
-    scoreCounter.text("Points " + scoreM);
-	multiplierCounter.text("Mult " +multiplier);
-	levelCounter.text("Level " +levelnumber);
-	}
+	levelCounter.hide();
 	
     // Hide "Start" button when pressed
     startButtonContainer.on("click", "#start-button", function() {
@@ -495,6 +500,7 @@ $(document).ready(function() {
 
 function playLevel(nodeNums) {
 	levelnumber++;
+	updateScoreDisplay();
     let rollCopy = nodeNums.slice();
     let nextNodeOrder = generateNextLevel(level, rollCopy);
     setTimeout(function() {     
