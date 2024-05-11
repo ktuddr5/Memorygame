@@ -596,7 +596,7 @@ function endGame(score) {
             "<h2> You have reached the maximum score of " + (score - 1).toString() + "</h2>";
     } else {
         gameMessage.innerHTML =
-            "<h2> Wrong! Multiplier lowered set to 1, score is " + (scoreM).toString() + ". Continue? </h2>";
+            "<h2> Wrong! Multiplier lowered set 1, score is " + (scoreM).toString() + ". Continue? </h2>";
     }
 }
 
