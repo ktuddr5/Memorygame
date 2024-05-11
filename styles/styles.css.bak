@@ -20,8 +20,8 @@ h2 {
     font-size: 1.75rem;
 }
 h5{
-	font-size: 2rem;
-	align: center;
+    font-size: 13pt;
+	
 }
 
 /* Body */
@@ -115,6 +115,19 @@ opacity: 0.1;
 
 #start-button-container {
     text-align: center;
+}
+
+#score-container,
+#multiplier-container {
+    display: inline-block; /* Display elements side by side */
+    vertical-align: middle; /* Align elements vertically in the middle */
+}
+
+#score-number {
+    transform-style: preserve-3d;
+    font-size: 15px;
+    line-height: 15px;
+	display: inline;
 }
 
 #start-button {

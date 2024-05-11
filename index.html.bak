@@ -54,19 +54,9 @@
         <div id="game-board" class="game-field">
             <!-- Game nodes will be generated inside this div -->
         </div>
-		
-		<h5> Score: </h5>
-		 <p>
-            <form id="guess-form">
-                <label for="guessName">Guess:</label>
-                <input type="text" id="guessName" name="guessName">
-                <input type="submit" value="Submit"><br>
-                <span id="guess-result"></span>
-            </form>
-        </p>
-		
-		
-		
+		<div id="score-container">
+			<h5>Score: <span id="score-number">0</span></h5>
+		</div>
     </div>
 
     <div id="secondary-game-container">

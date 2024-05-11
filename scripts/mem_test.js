@@ -400,13 +400,17 @@ function splitGameField() {
 
 $(document).ready(function() {
     let startButton = $("#start-button");
+	let scoreCounter = $("#score-container");
     let startButtonContainer = $("#start-button-container");
-	
-	
+	scoreCounter.hide();
+	function updateScoreDisplay() {
+        scoreCounter.text(scoreM);
+    }
 	
     // Hide "Start" button when pressed
     startButtonContainer.on("click", "#start-button", function() {
         startButton.hide();
+		scoreCounter.show();
         startGame();
     });
 	
@@ -426,6 +430,7 @@ $(document).ready(function() {
 		// on click always give 1 point
 		
 		scoreM = scoreM + multiplier;
+		updateScoreDisplay();
         let id = $(this).attr("id");
         let node = document.getElementById(id);
 
@@ -438,12 +443,9 @@ $(document).ready(function() {
 			
             endGame(level);
             startButton.show();
+			scoreCounter.hide();
             gameOver = true;
-			
 
-			
-			
-			
             return;
         }
 
@@ -460,7 +462,7 @@ $(document).ready(function() {
             if (level > numNodes) {
                 endGame(level);
                 startButton.show();
-				
+				scoreCounter.hide();
 				// add score calc here for when all sections done
                 return;
             }
@@ -475,6 +477,7 @@ $(document).ready(function() {
         emptyBoard(defaultBoard);
         playLevel(roll);
     }
+	updateScoreDisplay();
 });
 
 /* Main game loop */
@@ -655,3 +658,6 @@ function findCurrentNumber() {
 	}
 	return CurrentNumber;
 }
+
+
+  

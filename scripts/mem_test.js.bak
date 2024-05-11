@@ -400,13 +400,17 @@ function splitGameField() {
 
 $(document).ready(function() {
     let startButton = $("#start-button");
+	let scoreCounter = $("#score-container");
     let startButtonContainer = $("#start-button-container");
-	
-	
+	scoreCounter.hide();
+	function updateScoreDisplay() {
+        scoreCounter.text(scoreM);
+    }
 	
     // Hide "Start" button when pressed
     startButtonContainer.on("click", "#start-button", function() {
         startButton.hide();
+		scoreCounter.show();
         startGame();
     });
 	
@@ -424,20 +428,24 @@ $(document).ready(function() {
     $('#game-board').on("click", ".node", function() {
         if (gameOver) return; // Ignore clicks when the game is over
 		// on click always give 1 point
+		
 		scoreM = scoreM + multiplier;
+		updateScoreDisplay();
         let id = $(this).attr("id");
         let node = document.getElementById(id);
 
         if (node.classList.contains("node-f")) {
-            endGame(level);
-            startButton.show();
-            gameOver = true;
-			
 			// on wrong node click deduct 1 point`
 			scoreM = scoreM - multiplier;
 			// on wrong node click set multiplier to 1
 			multiplier = 1;
 			// add score calc here for when lost section
+			
+            endGame(level);
+            startButton.show();
+			scoreCounter.hide();
+            gameOver = true;
+
             return;
         }
 
@@ -446,18 +454,18 @@ $(document).ready(function() {
 
         // Check if all nodes have been clicked
         if ($('.node-t').length === 0) {
-            level++;
+            multiplier++;
+			// add score calc here for when cleared section
+			level++;
             firstNodeClicked = false;
             // End game if max score beat
             if (level > numNodes) {
                 endGame(level);
                 startButton.show();
-				
+				scoreCounter.hide();
 				// add score calc here for when all sections done
                 return;
             }
-			multiplier++;
-			// add score calc here for when cleared section
             playLevel(defaultBoard.slice());
         }
     });
@@ -649,3 +657,6 @@ function findCurrentNumber() {
 	}
 	return CurrentNumber;
 }
+
+
+  
