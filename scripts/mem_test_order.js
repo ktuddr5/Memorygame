@@ -11,6 +11,7 @@ let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
 let imagecoloring = 0;
+var video = document.getElementById("videoPlayer");
 
 // Given image
 let image = [
@@ -92,6 +93,7 @@ $(document).ready(function() {
     
                 // Check if all nodes have been clicked
                 if (currentOrder === nodeOrder.length) {
+                    video.play();
                     level++;
                     firstNodeClicked = false;
                     // End game if max score beat

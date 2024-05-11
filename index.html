@@ -19,12 +19,11 @@
 </head>
 <body>
 <header>
-    <section id="header-text" class="section-txt">
-        <h1>Mosaic Memory Master</h1>
-        <h2>By DDR5</h2>
+    <section class="header-container">
+        <img src="overlay.png" id="back2">
+        <div id="header-text">Mosaic Memory Master</div>
+        <div id="header-text2">by DDR5</div>
     </section>
-    <button id="hide-head-button" class="hide-button">Hide Heading</button>
-    <br/>
     <hr/>
 </header>
 <main>
@@ -51,6 +50,12 @@
     <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
 
     <div id="game-container">
+        <div id="video-container">
+            <video playsinline id="videoPlayer" >
+                <source src="Media/MMM_VFX.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div id="game-board" class="game-field">
             <!-- Game nodes will be generated inside this div -->
         </div>

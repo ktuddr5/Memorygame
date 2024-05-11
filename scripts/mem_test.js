@@ -13,9 +13,9 @@ let gameOver = false;
 let firstNodeClicked = false;
 let leveltemp = 0;
 let imagecoloring = 0;
-let levelnumber = 0;
 
 // score/points display
+let levelnumber = 0;
 let scoreCounter = $("#score-container");
 let multiplierCounter = $("#mult-container");
 let levelCounter = $("#lvl-container");
@@ -24,6 +24,9 @@ function updateScoreDisplay() {
 	multiplierCounter.text("Mult " +multiplier);
 	levelCounter.text("Level " +levelnumber);
 }
+
+var video = document.getElementById("videoPlayer");
+
 
 // chicken
 let image1 = [
@@ -468,9 +471,10 @@ $(document).ready(function() {
 
         // Check if all nodes have been clicked
         if ($('.node-t').length === 0) {
-            multiplier++;
 			// score calc for when cleared section
-			level++;
+            multiplier++;
+            video.play();
+            level++;
             firstNodeClicked = false;
             // End game if max score beat
             if (level > numNodes) {

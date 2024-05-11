@@ -1,7 +1,33 @@
 #game-container {
-    float: left;
+    position: absolute;
     width: 50%;
+    float: left;
 }
+#video-container {
+    position: absolute;
+    padding-top: 350px;
+    margin-top: -350px;
+
+    padding-bottom: 340px;
+
+    padding-left: 350px;
+    margin-left: -340px;
+    padding-right: 350px;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#videoPlayer{
+    position:absolute;
+    pointer-events: none;
+    inset: 0;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+
 
 #secondary-game-container {
     float: right;
@@ -21,6 +47,10 @@
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
+}
+
+#guess-form {
+    font-family: 'Barlow', Arial, sans-serif;
 }
 
 .node {
@@ -97,6 +127,3 @@
 .dark-mode #game-board > .node {
     border-color: #1D1D1D; /* Adjust border color */
 }
-
-
-
