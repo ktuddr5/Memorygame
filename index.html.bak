@@ -19,12 +19,11 @@
 </head>
 <body>
 <header>
-    <section id="header-text" class="section-txt">
-        <h1>Mosaic Memory Master</h1>
-        <h2>By DDR5</h2>
+    <section class="header-container">
+        <img src="overlay.png" id="back2">
+        <div id="header-text">Mosaic Memory Master</div>
+        <div id="header-text2">by DDR5</div>
     </section>
-    <button id="hide-head-button" class="hide-button">Hide Heading</button>
-    <br/>
     <hr/>
 </header>
 <main>
@@ -39,8 +38,12 @@
             Click the squares that appear.
             <br/>
             The test will get progressively harder.
-						
         </p>
+        <h2>Tutorial:</h2>
+        <video id="tutorial" width=50%; height="50%" style = "border: 8px solid #342020" controls>
+            <source src="Media/MMM tutorial.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+          </video>
     </section>
     <button id="hide-description-button" class="hide-button">Hide Description</button><br/>
     <hr/>
@@ -51,6 +54,12 @@
     <h4 id="game-message" class="section-txt">Click the button above to start the test</h4>
 
     <div id="game-container">
+        <div id="video-container">
+            <video playsinline id="videoPlayer" >
+                <source src="Media/MMM_VFX.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div id="game-board" class="game-field">
             <!-- Game nodes will be generated inside this div -->
         </div>
@@ -64,7 +73,7 @@
 				<span id="multiplier-number">1</span>
 			</div>
 			<p></p>
-			<div id="lvl-container">
+			<div id="lvl-container" class="inline-block">
 				<span id="level-number">0</span>
 			</div>
 		</div>
@@ -73,24 +82,24 @@
 
     <div id="secondary-game-container">
         <div class="image-container">
-            <img id="themeImage" style="position: absolute;">
+            <img id="themeImage" style="position: absolute; opacity: 0">
             <!-- Define each part with adjusted background positioning -->
-            <div class="part1" style="; background-position: 0% 0%;"></div>
-            <div class="part2" style="; background-position: 33% 0%;"></div>
-            <div class="part3" style="; background-position: 66% 0%;"></div>
-            <div class="part4" style="; background-position: 100% 0%;"></div>
-            <div class="part5" style="; background-position: 0% 33%;"></div>
-            <div class="part6" style="; background-position: 33% 33%;"></div>
-            <div class="part7" style="; background-position: 66% 33%;"></div>
-            <div class="part8" style="; background-position: 100% 33%;"></div>
-            <div class="part9" style="; background-position: 0% 66%;"></div>
-            <div class="part10" style="; background-position: 33% 66%;"></div>
-            <div class="part11" style="; background-position: 66% 66%;"></div>
-            <div class="part12" style="; background-position: 100% 66%;"></div>
-            <div class="part13" style="; background-position: 0% 100%;"></div>
-            <div class="part14" style="; background-position: 33% 100%;"></div>
-            <div class="part15" style="; background-position: 66% 100%;"></div>
-            <div class="part16" style="; background-position: 100% 100%;"></div>
+            <div class="part1" style="; background-position: 0% 0%; opacity: 0"></div>
+            <div class="part2" style="; background-position: 33% 0%; opacity: 0"></div>
+            <div class="part3" style="; background-position: 66% 0%; opacity: 0"></div>
+            <div class="part4" style="; background-position: 100% 0%; opacity: 0"></div>
+            <div class="part5" style="; background-position: 0% 33%; opacity: 0"></div>
+            <div class="part6" style="; background-position: 33% 33%; opacity: 0"></div>
+            <div class="part7" style="; background-position: 66% 33%; opacity: 0"></div>
+            <div class="part8" style="; background-position: 100% 33%; opacity: 0"></div>
+            <div class="part9" style="; background-position: 0% 66%;opacity: 0"></div>
+            <div class="part10" style="; background-position: 33% 66%;opacity: 0"></div>
+            <div class="part11" style="; background-position: 66% 66%;opacity: 0"></div>
+            <div class="part12" style="; background-position: 100% 66%;opacity: 0"></div>
+            <div class="part13" style="; background-position: 0% 100%;opacity: 0"></div>
+            <div class="part14" style="; background-position: 33% 100%;opacity: 0"></div>
+            <div class="part15" style="; background-position: 66% 100%;opacity: 0"></div>
+            <div class="part16" style="; background-position: 100% 100%;opacity: 0"></div>
         </div>
         <p>
             <span id="themeText"></span>
