@@ -11,6 +11,23 @@ let gameOver = false;
 let firstNodeClicked = false;
 var video = document.getElementById("videoPlayer");
 
+//SOUND EFFECT
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
+
+
 $(document).ready(function() {
     let startButton = $("#start-button");
     let startButtonContainer = $("#start-button-container");
@@ -29,6 +46,10 @@ $(document).ready(function() {
         let node = document.getElementById(id);
         let nodeNum = parseInt(node.id);
 
+        //play sound effect
+		var mySound = new sound("Media/Click.mp3");
+		mySound.play();
+        
         /* Check if number clicked in correct order */
         if(nodeNum !== nodeOrder[currentOrder]) {
             endGame(level);

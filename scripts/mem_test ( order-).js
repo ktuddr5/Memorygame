@@ -10,6 +10,24 @@ let level = 2;
 let gameOver = false;
 let firstNodeClicked = false;
 var video = document.getElementById("videoPlayer");
+var mySound = new sound("Media/Click.mp3");
+//SOUND EFFECT
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
+
+
 
 $(document).ready(function() {
     let startButton = $("#start-button");
@@ -28,6 +46,7 @@ $(document).ready(function() {
     $('#game-board').on("click", ".node-t", function() {
         if (gameOver) return; // Ignore clicks when the game is over
 
+        mySound.play();
         let id = $(this).attr("id");
         let node = document.getElementById(id);
 

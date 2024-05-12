@@ -14,6 +14,24 @@ let firstNodeClicked = false;
 let leveltemp = 0;
 let imagecoloring = 0;
 
+//SOUND EFFECT
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
+
+
+
 // score/points display
 let levelnumber = 0;
 let scoreCounter = $("#score-container");
@@ -442,8 +460,12 @@ $(document).ready(function() {
     */
     $('#game-board').on("click", ".node", function() {
         if (gameOver) return; // Ignore clicks when the game is over
-		// on click always give 1 point
 		
+		//play sound effect
+		var mySound = new sound("Media/Click.mp3");
+		mySound.play();
+		
+		// on click always give 1 point
 		scoreM = scoreM + multiplier;
 		updateScoreDisplay();
         let id = $(this).attr("id");
@@ -551,7 +573,7 @@ function renderLevelBoard(boardNodes) {
 
         // Set the initial class and text content
         boardNode.className = "node node-t-alternate";
-        boardNode.innerText = (i + 1).toString();
+        //boardNode.innerText = (i + 1).toString();
 
         // Disable click events for the first second
         boardNode.style.pointerEvents = "none";
@@ -580,7 +602,7 @@ function emptyBoard(board) {
     let gameMessage = document.getElementById("game-message");
 
     for (let i = 0; i < board.length; i++) {
-        templateString += "<button class=\"node node-f\" id=" + (i + 1) + "> 0 </button>";
+        templateString += "<button class=\"node node-f\" id=" + (i + 1) + ">  </button>";
     }
     gameBoard.innerHTML = templateString;
     gameMessage.innerHTML = "";

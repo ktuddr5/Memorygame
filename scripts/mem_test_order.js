@@ -13,6 +13,23 @@ let leveltemp = 0;
 let imagecoloring = 0;
 var video = document.getElementById("videoPlayer");
 
+//SOUND EFFECT
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
+
+
 // Given image
 let image = [
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -77,6 +94,11 @@ $(document).ready(function() {
         let id = $(this).attr("id");
         let node = document.getElementById(id);
     
+
+        //play sound effect
+		var mySound = new sound("Media/Click.mp3");
+		mySound.play();
+        
         if (node.classList.contains("node-f")) {
             endGame(level);
             startButton.show();
