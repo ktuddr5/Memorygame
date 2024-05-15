@@ -79,6 +79,10 @@ a:hover {
     min-width: 20px;
     min-height: 30px;
 }
+.buttonToMenu {
+	border: 10px;
+	
+}
 
 /* Define styles for the container */
 .image-container {
@@ -158,7 +162,12 @@ opacity: 0.1;
     min-height: 20px;
     min-width: 40px;
 }
-
+#thisisabutton
+{
+	display = "flex";
+    flexDirection = "column";
+    alignItems = "center";
+}
 #game-description {
     text-align: center;
     font-size: 13pt;
