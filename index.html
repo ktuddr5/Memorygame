@@ -18,6 +18,9 @@
     <title>Chimp Test</title>
 </head>
 <body>
+<div class="button-container">
+    <button id="buttonToMenu">Back to menu</button>
+</div>
 <header>
     <section class="header-container">
         <img src="overlay.png" id="back2">
@@ -160,7 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 };
+	//
+    function backToMenu(scriptOption) {
+        // Get the selected theme
 
+        // Redirect to index.html with selected script option and theme as query parameters
+        window.location.href = `main.html`;
+    }
+	document.getElementById("buttonToMenu").addEventListener("click", function() {
+        var selectedScript = localStorage.getItem("selectedScript");
+        if (!selectedScript) {
+            alert("Please select a script option first.");
+            return;
+        }
+        backToMenu(selectedScript);
+    });
+	
     // Retrieve the selected theme from the query parameter
     const selectedTheme = new URLSearchParams(window.location.search).get('theme');
 
@@ -168,8 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (selectedTheme) {
         loadThemeImage(selectedTheme);
     }
-});
-const thematic = new URLSearchParams(window.location.search).get('theme');
+	});
+	const thematic = new URLSearchParams(window.location.search).get('theme');
     // JavaScript code to toggle dark mode and store the preference
     const toggleDarkMode = () => {
         document.body.classList.toggle('dark-mode');

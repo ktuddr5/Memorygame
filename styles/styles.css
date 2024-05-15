@@ -158,7 +158,12 @@ opacity: 0.1;
     min-height: 20px;
     min-width: 40px;
 }
-
+#thisisabutton
+{
+	display = "flex";
+    flexDirection = "column";
+    alignItems = "center";
+}
 #game-description {
     text-align: center;
     font-size: 13pt;
