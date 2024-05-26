@@ -31,6 +31,26 @@
 </header>
 <main>
     <section id="description-text" class="section-txt">
+        <script src="https://form.jotform.com/static/feedback2.js"></script>
+        <script>
+            var componentID = new JotformFeedback({
+            
+        type: false,
+        width: 700,
+        height: 500,
+        fontColor: "#FFFFFF",
+        background: "#602a2a",
+        isCardForm: false,
+        formId: "241461639929063"
+        ,
+            buttonText: "Bug report and feedback",
+            buttonSide: "left",
+            buttonAlign: "center",
+            base: "https://form.jotform.com/",
+            }).componentID;
+        </script>
+        <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+        <script>window.jotformEmbedHandler("iframe[id='" + componentID + "_iframe']", "https://form.jotform.com/")</script>
         <h2>Test Your Working Memory</h2>
         <h3>Idea taken from <a href="https://humanbenchmark.com/tests/chimp" target="_blank">
                 Chimpanzee Test</a> and improved upon.
